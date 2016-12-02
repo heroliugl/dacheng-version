@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 车辆Dao接口实现类 -->
+
+<!-- 车辆Dao接口 -->
+<mapper namespace="com.dacheng.mapper.VersionMapper">
+	
+	<resultMap type="Version" id="versionResult">
+		<result property="id" column="id" />
+		<result property="vname" column="vname" />
+		<result property="ptype" column="ptype" />
+		<result property="vtype" column="vtype" />
+		<result property="vcode" column="vcode" />
+		<result property="vm" column="vm" />
+		<result property="forceUpdate" column="force_update" />
+		<result property="url" column="url" />
+		<result property="status" column="status" />
+		<result property="vflag" column="vflag" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+	
+	
+	<!-- 保存车辆信息 -->
+	<insert id="saveVersion" parameterType="Version">
+		insert into dc_version (vname, ptype, vtype, vcode, vm, force_update,url,status,vflag,create_time,update_time) 
+		values (#{vname}, #{ptype}, #{vtype}, #{vcode}, #{vm}, #{forceUpdate}, #{url},#{status}, #{vflag}, now(), now())
+		<selectKey resultType="long" keyProperty="id"  order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 根据车辆ID删除车辆信息 -->
+	<delete id="deleteVersionById">
+		delete from dc_version where id = #{id}
+	</delete>
+	
+	<!-- 根据车辆ID更新里程 -->
+	<update id="UpdateVersion" parameterType="Version">
+		update dc_version 
+		<set>
+		    update_time = now()
+			<if test="vname != null and vname != '' ">
+				,vname = #{vname}
+			</if>
+			<if test="ptype != null and ptype != '' ">
+				,ptype = #{ptype}
+			</if>
+			<if test="vtype != null and vtype != ''  ">
+				,vtype = #{vtype}
+			</if>
+			<if test="vcode != null and vcode != ''  ">
+				,vcode = #{vcode}
+			</if>
+			<if test="vm != null ">
+				,vm = #{vm}
+			</if>
+			<if test="forceUpdate != null">
+				,force_update = #{forceUpdate}
+			</if>
+			<if test="url != null and url != ''  ">
+				,url = #{url}
+			</if>
+			<if test="status != null and status != ''  ">
+				,vflag = #{vflag}
+			</if>
+			<if test="vflag != null and vflag != ''  ">
+				,vflag = #{vflag}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 根据用户ID查询车辆信息 -->
+	<select id="findVersionById" resultMap="versionResult">
+		select * from dc_version where id = #{id}
+	</select>
+	
+
+</mapper>

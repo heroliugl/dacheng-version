@@ -1,56 +1,22 @@
 package com.dacheng.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.dacheng.constant.ErrConstant;
-import com.dacheng.entity.Car;
-import com.dacheng.entity.Trip;
-import com.dacheng.entity.User;
-import com.dacheng.entity.view.TripView;
-import com.dacheng.service.CarService;
-import com.dacheng.service.TripService;
-import com.dacheng.service.UserService;
-import com.dacheng.utils.JsonMapper;
 
 @Controller
-@RequestMapping(value = "/tripInterface")
-public class TripController {
-	//行程Biz接口
-	@Resource
-	private TripService tripService;
-	//车辆Biz接口
-	@Resource
-	private CarService carService;
-	@Resource
-	private UserService userService;
-	
-	//行程实体对象
-	private Trip trip;
-	
-	//行程实体对象集合
-	private List<Trip> trips;
-	
-	//行程实体对象显示集合
+@RequestMapping(value = "/version")
+public class VersionController {
+
+	/*//行程实体对象显示集合
 	private TripView tripView;
 	
 	//日志
-	private Logger logger = LoggerFactory.getLogger(TripController.class);
+	private Logger logger = LoggerFactory.getLogger(VersionController.class);
 	
-	/**
+	*//**
 	 * 保存行程信息 
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/addCarTrip")
 	@ResponseBody
 	public String createTrip(@RequestParam(value="loginname", required = true) String loginname, 
@@ -95,10 +61,10 @@ public class TripController {
 		}
 	}
 	
-	/**
+	*//**
 	 * 根据行程ID查询行程信息
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/getTripDetail")
 	@ResponseBody
 	public String getTripByTripid(@RequestParam(value="tripid", required = true) int tripid) {
@@ -121,10 +87,10 @@ public class TripController {
 		}
 	}
 	
-	/**
+	*//**
 	 * 根据行程日期查询行程信息（日期为客户端指定）
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/getTripByTripdate")
 	@ResponseBody
 	public String getTripByTripdate(@RequestParam(value="loginname", required = true) String loginname,
@@ -178,10 +144,10 @@ public class TripController {
 		}
 	}
 	
-	/**
+	*//**
 	 * 根据车辆ID更新里程
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/settingMileage")
 	@ResponseBody
 	public String settingMileage(@RequestParam(value="loginname", required = true) String loginname,
@@ -212,11 +178,11 @@ public class TripController {
 			return JsonMapper.failedToJson();
 		}
 	}
-	/**
+	*//**
 	 * 根据用户名查询车辆的校准里程值
 	 * @param username 用户名
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/getSettingMileage")
 	@ResponseBody
 	public String getCarCorrectMileage(@RequestParam(value="username",required = true) String username){
@@ -274,11 +240,11 @@ public class TripController {
 //		return tempList.get(0);
 //	}
 	
-	/**
+	*//**
 	 * 查询当天排行榜
 	 * @param rankingtype 排行榜类型 1：最低油耗，2：最长行驶距离
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/getFuelOrMileageRanking")
 	@ResponseBody
 	public String getFuelOrMileageRanking(@RequestParam(value="rankingtype", required = true) int rankingtype) {
@@ -303,5 +269,5 @@ public class TripController {
 			//调用《JsonMapper》的《错误返回码转换成JSON》方法
 			return JsonMapper.failedToJson();
 		}
-	}
+	}*/
 }
