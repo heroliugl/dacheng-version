@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 保养项目Dao接口实现类 -->
+
+<!-- 保养项目Dao接口 -->
+<mapper namespace="com.dacheng.push.mapper.MaintainMapper">
+	<!-- 查询所有保养项目信息 -->
+	<select id="queryProjects" resultType="Project">
+		select * from projects
+	</select>
+	
+	<!-- 查询所有保养记录信息 -->
+	<select id="queryRecords" resultType="RecordView">
+		select r.recordid, r.carid, p.projectid, p.projectname,p.englishname,p.mileage smileage, r.recorddate, r.mileage, r.totalfee, r.workfee, r.recordphoto,r.other from records r 
+		left join projects p on r.projectid = p.projectid where r.carid = #{carid}
+	</select>
+	
+	<!-- 保存保养记录信息 -->
+	<insert id="insertRecord" parameterType="Record" useGeneratedKeys="true" keyProperty="recordid">
+		insert into records (carid, recorddate, mileage, projectid, totalfee, workfee, other) 
+		values (#{carid}, #{recorddate}, #{mileage}, #{project.projectid}, #{totalfee}, #{workfee} ,#{other})
+	</insert>
+	
+	<!-- 根据保养记录ID更新保养记录图片 -->
+	<update id="updateRecordPhoto">
+		update records 
+		<set>
+			recordphoto = #{recordphoto} 
+		</set>
+		where recordid = #{recordid}
+		<selectKey resultType="int" keyProperty="recordid"  order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</update>
+	
+	<!-- 根据保养记录ID查询保养记录信息 -->
+	<select id="queryRecordByRecordid" resultType="Record">
+		select * from records where recordid = #{recordid}
+	</select>
+	
+	<!-- 保存用户自己设置的保养项目 -->
+	<insert id="insertUserProject" parameterType="UserProject">
+		insert into userprojects (userid, projectid, mileage, createtime) 
+		values (#{userid}, #{projectid}, #{mileage}, now())
+		<selectKey resultType="int" keyProperty="userprojectid"  order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 根据保养项目ID查询用户自己设置的保养项目 -->
+	<select id="queryUserProjectByProjectid" resultType="UserProject">
+		select * from userprojects where userid = #{userid} and projectid = #{projectid}
+	</select>
+
+	<!-- 根据用户ID查询用户自己设置的保养项目 -->
+	<select id="queryUserProjectByUserid" resultType="UserProject">
+		select * from userprojects where userid = #{userid}
+	</select>
+
+	<!-- 查询保养记录中各个保养项目的最大的里程 -->
+	<select id="queryRecordMaxMileageByCarid" resultMap="queryRecordMaxMileageByCaridMap">
+		select recordid, projectid, max(mileage) as mileage from records where carid = (select a.carid FROM cars a LEFT JOIN users b on a.userid=b.userid where b.loginname=#{loginname} )group by projectid
+	</select>
+		
+	<!-- 查询有保养记录的保养项目信息 -->
+	<select id="queryProjectByYesRecord" resultType="Project">
+		select * from projects where projectid in (select projectid from records where carid = (select a.carid FROM cars a LEFT JOIN users b on a.userid=b.userid where b.loginname=#{loginname} )  group by projectid) and projectid != 0
+	</select>
+	
+	<!-- 查询没有有保养记录的保养项目信息 -->
+	<select id="queryProjectByNoRecord" resultType="Project">
+		select * from projects where projectid not in (select projectid from records where carid = (select a.carid FROM cars a LEFT JOIN users b on a.userid=b.userid where b.loginname=#{loginname} ) group by projectid) and projectid != 0
+	</select>
+	
+	<!-- 查询所有保养项目类型信息 -->
+	<select id="queryProjectTypes" resultType="ProjectType">
+		select * from projecttypes
+	</select>
+	
+	<!-- 根据保养项目类型ID查询保养项目信息 -->
+	<select id="queryProjectByTypeid" resultType="Project">
+		select * from projects where typeid = #{typeid}
+	</select>
+	
+	<!-- 根据保养记录ID删除保养记录信息 -->
+	<delete id="deleteRecordByRecordid">
+		delete from records where recordid = #{recordid}
+	</delete>
+	
+	<!-- 查询保养记录中各个保养项目的最大的里程Map -->
+	<resultMap type="com.dacheng.push.entity.Record" id="queryRecordMaxMileageByCaridMap">
+		<id column="recordid" property="recordid"/>
+		<result column="mileage" property="mileage"/>
+		<association property="project" javaType="Project">
+			<result column="projectid" property="projectid"/>
+		</association>
+	</resultMap>
+</mapper>

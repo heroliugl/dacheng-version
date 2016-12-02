@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 行程Dao接口实现类 -->
+
+<!-- 行程Dao接口 -->
+<mapper namespace="com.dacheng.push.mapper.TripMapper">
+	<!-- 保存行程信息 -->
+	<insert id="insertTrip" parameterType="Trip">
+		insert into trips (carid, starttime, endtime, score, fuelclass, driveclass, mileage, triptime, averagespeed, averagefuel, tripfuel, topSpeed, topRPM, fuelfee ,idletime)
+		values (#{carid}, #{starttime}, #{endtime}, #{score}, #{fuelclass}, #{driveclass}, #{mileage}, #{triptime}, #{averagespeed}, #{averagefuel}, #{tripfuel},#{topSpeed},#{topRPM}, #{fuelfee} ,#{idletime})
+		<selectKey resultType="int" keyProperty="tripid"  order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 根据行程ID查询行程信息 -->
+	<select id="queryTripByTripid" resultType="Trip">
+		select * from trips where tripid = #{tripid}
+	</select>
+	
+	<!-- 根据行程日期统计行程总数（日期为客户端指定） -->
+	<select id="queryTotalTripByTripdate" resultType="Trip">
+		select sum(mileage) as mileage, sum(fuelfee) as fuelfee, sum(tripfuel) as tripfuel from trips where carid = #{carid} 
+		<if test="triptype == 1">
+			and date_format(starttime, '%Y-%m') = #{tripdate}
+		</if>
+		<if test="triptype == 2">
+			and date_format(starttime, '%Y-%m-%d') = #{tripdate}
+		</if>
+	</select>
+	
+	<!-- 根据行程日期查询行程信息（日期为客户端指定） -->
+	<select id="queryTripByTripdate" resultType="Trip">
+		select * from trips where carid = #{carid} 
+		<if test="triptype == 1">
+			and date_format(starttime, '%Y-%m') = #{tripdate}
+		</if>
+		<if test="triptype == 2">
+			and date_format(starttime, '%Y-%m-%d') = #{tripdate}
+		</if>
+	</select>
+	
+	<!-- 查询最低油耗排行榜 -->
+	<select id="queryFuelRanking" resultType="RankingView">
+		select u.nickname, u.headurl, c.cityname, c.model, c.displacement, format(avg(t.averagefuel), 1) as averagefuel 
+		from trips t right join cars c on t.carid = c.carid 
+		left join users u on c.userid = u.userid 
+		where date_format(t.endtime, '%Y-%m-%d') = #{rankingdate} 
+		group by t.carid 
+		order by tripfuel
+	</select>
+	
+	<!-- 查询最长行驶距离排行榜 -->
+	<select id="queryMileageRanking"  resultType="RankingView">
+		select u.nickname, u.headurl, c.cityname, c.model, c.displacement, format(sum(t.mileage), 1) as mileage 
+		from trips t right join cars c on t.carid = c.carid 
+		left join users u on c.userid = u.userid 
+		where date_format(t.endtime, '%Y-%m-%d') = #{rankingdate} 
+		group by t.carid 
+		order by mileage desc
+	</select>
+</mapper>

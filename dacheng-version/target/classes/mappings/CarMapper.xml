@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 车辆Dao接口实现类 -->
+
+<!-- 车辆Dao接口 -->
+<mapper namespace="com.dacheng.push.mapper.CarMapper">
+	<!-- 查询所有车辆信息 -->
+	<select id="queryCars" resultType="Car">
+		select * from cars
+	</select>
+	
+	<!-- 根据用户ID查询车辆信息 -->
+	<select id="queryCarByUserid" resultType="Car">
+		select * from cars where userid = #{userid}
+	</select>
+	
+	<!-- 保存车辆信息 -->
+	<insert id="insertCar" parameterType="Car">
+		insert into cars (userid, cityname, model, displacement, year, obdcode) 
+		values (#{userid}, #{cityname}, #{model}, #{displacement}, #{year}, #{obdcode})
+		<selectKey resultType="int" keyProperty="carid"  order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 根据车辆ID更新里程 -->
+	<update id="updateMileageByCarid">
+		update cars 
+		<set>
+			mileage = #{mileage} 
+		</set>
+		where carid = #{carid}
+		<selectKey resultType="int" keyProperty="carid"  order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</update>
+	
+	<!-- 根据车辆ID查询车辆信息 -->
+	<select id="queryCarByCarid" resultType="Car">
+		select * from cars where userid = (select userid from users where loginname = #{loginname})
+	</select>
+	
+	<!-- 根据车辆ID删除车辆信息 -->
+	<delete id="deleteCarByCarid">
+		delete from cars where carid = #{carid}
+	</delete>
+</mapper>
