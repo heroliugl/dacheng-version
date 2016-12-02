@@ -38,37 +38,34 @@
     <servlet-name>SpringMVC</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
-  
-  	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.js</url-pattern>
-		<url-pattern>*.css</url-pattern>
-		<url-pattern>*.png</url-pattern>
-		<url-pattern>*.jpg</url-pattern>
-		<url-pattern>*.gif</url-pattern>
-		<url-pattern>*.ico</url-pattern>
-		<url-pattern>*.zip</url-pattern>
-		<url-pattern>*.rar</url-pattern>
-		<url-pattern>*.htm</url-pattern>
-		<url-pattern>*.html</url-pattern>
-		<url-pattern>*.json</url-pattern>
-		<url-pattern>*.xml</url-pattern>
-		<url-pattern>*.swf</url-pattern>
-		<url-pattern>*.jpeg</url-pattern>
-		<url-pattern>*.emf</url-pattern>
-		<url-pattern>*.cab</url-pattern>
-		<url-pattern>*.woff</url-pattern>
-		<url-pattern>*.woff2</url-pattern>
-		<url-pattern>*.map</url-pattern>
-		<url-pattern>*.</url-pattern>
-	</servlet-mapping>
-	<session-config>
-		<session-timeout>360</session-timeout>
-	</session-config>
-  
-	 <welcome-file-list>
-	       <welcome-file>login.jsp</welcome-file>
-	       <welcome-file>index.html</welcome-file>
-	 </welcome-file-list>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.png</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.gif</url-pattern>
+    <url-pattern>*.ico</url-pattern>
+    <url-pattern>*.zip</url-pattern>
+    <url-pattern>*.rar</url-pattern>
+    <url-pattern>*.htm</url-pattern>
+    <url-pattern>*.html</url-pattern>
+    <url-pattern>*.json</url-pattern>
+    <url-pattern>*.xml</url-pattern>
+    <url-pattern>*.swf</url-pattern>
+    <url-pattern>*.jpeg</url-pattern>
+    <url-pattern>*.emf</url-pattern>
+    <url-pattern>*.cab</url-pattern>
+    <url-pattern>*.woff</url-pattern>
+    <url-pattern>*.woff2</url-pattern>
+    <url-pattern>*.map</url-pattern>
+    <url-pattern>*.</url-pattern>
+  </servlet-mapping>
+  <session-config>
+    <session-timeout>360</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 </web-app>
