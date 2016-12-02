@@ -4,7 +4,7 @@
 <!-- 用户Dao接口实现类 -->
 
 <!-- 用户Dao接口 -->
-<mapper namespace="com.dacheng.push.mapper.UserMapper">
+<mapper namespace="com.dacheng.mapper.UserMapper">
 	<!-- 查询所有用户信息 -->
 	<select id="queryUsers" resultType="User">
 		select * from users

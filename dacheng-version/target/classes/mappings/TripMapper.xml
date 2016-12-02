@@ -4,7 +4,7 @@
 <!-- 行程Dao接口实现类 -->
 
 <!-- 行程Dao接口 -->
-<mapper namespace="com.dacheng.push.mapper.TripMapper">
+<mapper namespace="com.dacheng.mapper.TripMapper">
 	<!-- 保存行程信息 -->
 	<insert id="insertTrip" parameterType="Trip">
 		insert into trips (carid, starttime, endtime, score, fuelclass, driveclass, mileage, triptime, averagespeed, averagefuel, tripfuel, topSpeed, topRPM, fuelfee ,idletime)

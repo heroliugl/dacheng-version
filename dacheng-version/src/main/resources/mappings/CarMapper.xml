@@ -4,7 +4,7 @@
 <!-- 车辆Dao接口实现类 -->
 
 <!-- 车辆Dao接口 -->
-<mapper namespace="com.dacheng.push.mapper.CarMapper">
+<mapper namespace="com.dacheng.mapper.CarMapper">
 	<!-- 查询所有车辆信息 -->
 	<select id="queryCars" resultType="Car">
 		select * from cars

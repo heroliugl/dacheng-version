@@ -10,14 +10,14 @@
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-	<!-- <context:component-scan base-package="com.dacheng.push.controller" /> -->
+	<!-- <context:component-scan base-package="com.dacheng.controller" /> -->
 
 	
 	<!-- 开启注解 -->
-	<context:component-scan base-package="com.dacheng.push">
+	<context:component-scan base-package="com.dacheng">
        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"  />
        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"  />
-	   <context:exclude-filter type="regex" expression="com.dacheng.push.mqtt.service.MqttApplication"/>
+	   <context:exclude-filter type="regex" expression="com.dacheng.mqtt.service.MqttApplication"/>
     </context:component-scan>
 	
 	<!-- 处理spring的DispatcherServlet使js/css/jpg/gif等资源文件无法访问，必须是spring3.0.5以上版本 -->

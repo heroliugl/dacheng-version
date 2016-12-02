@@ -16,7 +16,7 @@
 
 	<mvc:annotation-driven />
 
-	<context:component-scan base-package="com.dacheng.push" use-default-filters="true">
+	<context:component-scan base-package="com.dacheng" use-default-filters="true">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
