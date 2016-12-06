@@ -17,18 +17,18 @@ import com.dacheng.service.VersionService;
 
 
 @Controller
-@RequestMapping(value = "/version")
-public class VersionController extends BaseController{
+@RequestMapping(value = "/")
+public class SystemController extends BaseController{
 	
 	@Autowired
 	private VersionService versionService;
 	
-    @RequestMapping(value="/list", method = RequestMethod.GET)
+    @RequestMapping(value="/index", method = RequestMethod.GET)
     public String list() {
-        return "/version/versionList";
+        return "/index";
     }
     
-    @RequestMapping(value="/list", method = RequestMethod.POST)
+/*    @RequestMapping(value="/list", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> list(@RequestParam(value = "currentPage", defaultValue = "0") int currentPage
             , @RequestParam(value = "pageSize", defaultValue = "50") int pageSize,Version version) {
@@ -43,5 +43,5 @@ public class VersionController extends BaseController{
 			map.put("page", null);
 		}
         return map;
-    }
+    }*/
 }

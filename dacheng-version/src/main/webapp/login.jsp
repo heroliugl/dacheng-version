@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="index.jsp"><b>Dacheng</b>PUSH</a>
+    <a href="index.jsp"><b>Dacheng</b>Version</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

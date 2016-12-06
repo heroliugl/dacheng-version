@@ -6,6 +6,25 @@
 <!-- 车辆Dao接口 -->
 <mapper namespace="com.dacheng.mapper.VersionMapper">
 	
+	<sql id="pre">
+		<if test="doAount ==true">
+			SELECT COUNT(*) as counts FROM (
+		</if>
+		<if test="doAount ==false">
+			SELECT * FROM (
+		</if>
+	</sql>
+	
+	<sql id="suf">
+		<if test="doAount ==true">
+			) _a
+		</if>
+		<if test="doAount ==false">
+			) _a limit #{beginIndex}, #{pageSize}#
+		</if>
+	</sql>
+	
+	
 	<resultMap type="Version" id="versionResult">
 		<result property="id" column="id" />
 		<result property="vname" column="vname" />
@@ -76,6 +95,25 @@
 	<select id="findVersionById" resultMap="versionResult">
 		select * from dc_version where id = #{id}
 	</select>
+	
+	<select id="findPage" resultType="java.util.HashMap">
+		<include refid="pre"/>
+		select * from dc_version
+		<include refid="suf"/>
+	</select>
+	
+   <select id="findPageList" resultMap="versionResult">
+		<include refid="pre"/>
+		select * from dc_version
+		<include refid="suf"/>
+	</select>
+	
+   <select id="findList" resultMap="versionResult">
+		select * from dc_version
+	</select>
+	
+	
+
 	
 
 </mapper>

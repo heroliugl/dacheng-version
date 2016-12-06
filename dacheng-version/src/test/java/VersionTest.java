@@ -9,7 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dacheng.entity.Version;
+import com.dacheng.entity.view.PageView;
 import com.dacheng.service.VersionService;
+import com.github.pagehelper.PageInfo;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -89,6 +91,41 @@ public class VersionTest {
 			e.printStackTrace();
 		}
         // assertTrue(1==1);
+    }
+    
+    @Test
+    public void testPageQuery() {
+       try {
+    	   
+    	   PageView<Version> pageView = versionService.findPage(2,11,null);
+    	   System.out.println(pageView.toString());
+    	   System.out.println("==============================================");
+    	   for(Version v : pageView.getRecords()){
+    		   System.out.println(v.toString());
+    	   }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        // assertTrue(1==1);
+    }
+    
+    
+    @Test
+    public void queryByPageTest(){  
+       
+		try {
+			PageInfo<Version> page = versionService.queryByPage(2,2,null);
+			System.out.println(page);
+			  System.out.println("==============================================");
+			for(Version v : page.getList()){
+	    		   System.out.println(v.toString());
+	    	   }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     }
 
    
