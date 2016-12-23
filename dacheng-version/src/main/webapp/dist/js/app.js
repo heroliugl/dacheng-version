@@ -393,10 +393,14 @@ function _init() {
         //Get the clicked link and the next element
         var $this = $(this);
         var checkElement = $this.next();
-
+        /*alert("21312");
+        alert(checkElement.is('.treeview-menu'));
+        alert(checkElement.is(':visible'));
+        alert(!$('body').hasClass('sidebar-collapse'));*/
         //Check if the next element is a menu and is visible
         if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible')) && (!$('body').hasClass('sidebar-collapse'))) {
           //Close the menu
+        	// alert("222222");
           checkElement.slideUp(animationSpeed, function () {
             checkElement.removeClass('menu-open');
             //Fix the layout in case the sidebar stretches over the height of the window
@@ -407,6 +411,7 @@ function _init() {
         //If the menu is not visible
         else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
           //Get the parent menu
+        	// alert("111111");
           var parent = $this.parents('ul').first();
           //Close all open menus within the parent
           var ul = parent.find('ul:visible').slideUp(animationSpeed);

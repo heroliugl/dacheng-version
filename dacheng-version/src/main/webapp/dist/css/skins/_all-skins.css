@@ -66,8 +66,8 @@
   color: #fff;
 }
 .skin-blue .sidebar-menu > li.header {
-  color: #4b646f;
-  background: #1a2226;
+  color: #fff;
+  background: #0b6998;
 }
 .skin-blue .sidebar-menu > li > a {
   border-left: 3px solid transparent;

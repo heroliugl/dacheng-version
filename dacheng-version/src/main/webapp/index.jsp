@@ -1,10 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="en"	class="app js no-touch no-android chrome no-firefox no-iemobile no-ie no-ie10 no-ie11 no-ios no-ios7 ipad">
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
+<%
+	String path = request.getContextPath();
+%>
+<!DOCTYPE html>
+<html lang="en"	>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>Version | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -16,13 +20,14 @@
   
   <!-- Ionicons -->
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">-->
-  <link rel="stylesheet" href="ionicons/css/ionicons.min.css">
+<!--   <link rel="stylesheet" href="ionicons/css/ionicons.min.css"> -->
   
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+<!--   <link rel="stylesheet" href="dist/css/skins/_all-skins.css"> -->
+  <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
   <!-- Morris chart -->
@@ -42,22 +47,26 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  
+  
+  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" ng-app="myApp">
 <div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>DC</b>-V</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Dacheng</b>Version</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
@@ -65,16 +74,16 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success">0</span>
             </a>
-            <ul class="dropdown-menu">
+           <!--  <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
               <li>
-                <!-- inner menu: contains the actual data -->
+                inner menu: contains the actual data
                 <ul class="menu">
-                  <li><!-- start message -->
+                  <li>start message
                     <a href="#">
                       <div class="pull-left">
                         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -86,7 +95,7 @@
                       <p>Why not buy a new awesome theme?</p>
                     </a>
                   </li>
-                  <!-- end message -->
+                  end message
                   <li>
                     <a href="#">
                       <div class="pull-left">
@@ -123,6 +132,7 @@
                       <p>Why not buy a new awesome theme?</p>
                     </a>
                   </li>
+  
                   <li>
                     <a href="#">
                       <div class="pull-left">
@@ -138,18 +148,18 @@
                 </ul>
               </li>
               <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
+            </ul> -->
           </li>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning">0</span>
             </a>
-            <ul class="dropdown-menu">
+   <!--          <ul class="dropdown-menu">
               <li class="header">You have 10 notifications</li>
               <li>
-                <!-- inner menu: contains the actual data -->
+                inner menu: contains the actual data
                 <ul class="menu">
                   <li>
                     <a href="#">
@@ -180,20 +190,20 @@
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
-            </ul>
+            </ul> -->
           </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <li class="dropdown tasks-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-flag-o"></i>
-              <span class="label label-danger">9</span>
+              <span class="label label-danger">0</span>
             </a>
-            <ul class="dropdown-menu">
+<!--             <ul class="dropdown-menu">
               <li class="header">You have 9 tasks</li>
               <li>
-                <!-- inner menu: contains the actual data -->
+                inner menu: contains the actual data
                 <ul class="menu">
-                  <li><!-- Task item -->
+                  <li>Task item
                     <a href="#">
                       <h3>
                         Design some buttons
@@ -206,8 +216,8 @@
                       </div>
                     </a>
                   </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
+                  end task item
+                  <li>Task item
                     <a href="#">
                       <h3>
                         Create a nice theme
@@ -220,8 +230,8 @@
                       </div>
                     </a>
                   </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
+                  end task item
+                  <li>Task item
                     <a href="#">
                       <h3>
                         Some task I need to do
@@ -234,8 +244,8 @@
                       </div>
                     </a>
                   </li>
-                  <!-- end task item -->
-                  <li><!-- Task item -->
+                  end task item
+                  <li>Task item
                     <a href="#">
                       <h3>
                         Make beautiful transitions
@@ -248,13 +258,13 @@
                       </div>
                     </a>
                   </li>
-                  <!-- end task item -->
+                  end task item
                 </ul>
               </li>
               <li class="footer">
                 <a href="#">View all tasks</a>
               </li>
-            </ul>
+            </ul> -->
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
@@ -321,7 +331,7 @@
         </div>
       </div>
       <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
+     <!--  <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
               <span class="input-group-btn">
@@ -329,41 +339,56 @@
                 </button>
               </span>
         </div>
-      </form>
+      </form> -->
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+        <li class="header"><strong>导航面板</strong></li>
+        <li class="active">
+          <a href="#/index"><!-- /pages/calendar.html -->
+            <i class="fa fa-dashboard"></i> <span>控制台</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <!-- <i class="fa fa-angle-left pull-right"></i> -->
             </span>
           </a>
-          <ul class="treeview-menu">
+          <!-- <ul class="treeview-menu">
             <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
+          </ul> -->
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="javascript:void(0)">
             <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
+            <span>版本管理</span>
             <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="#/version/list"><i class="fa fa-circle-o"></i> BM2</a></li>
+            <li><a href="/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> OBD</a></li>
+            <li><a href="/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 床垫</a></li>
+            <li><a href="/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 其他</a></li>
           </ul>
         </li>
+        <li class="treeview">
+	          <a href="#">
+	            <i class="fa fa-pie-chart"></i>
+	            <span>统计</span>
+	            <span class="pull-right-container">
+	              <i class="fa fa-angle-left pull-right"></i>
+	            </span>
+	          </a>
+	          <ul class="treeview-menu">
+	            <li><a href="javascript:listIgoal('/pages/charts/chartjs1.html');"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+	            <li><a href="javascript:listIgoal('/pages/charts/morris.html');"><i class="fa fa-circle-o"></i> Morris</a></li>
+	            <li><a href="javascript:listIgoal('/pages/charts/flot.html');"><i class="fa fa-circle-o"></i> Flot</a></li>
+	            <li><a href="javascript:listIgoal('/pages/charts/inline.html');"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+	          </ul>
+	    </li>
         <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+          <a href="javascript:listIgoal('/pages/calendar.html');">
+            <i class="fa fa-th"></i> <span>帮助</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>
@@ -405,19 +430,18 @@
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="#/index"><i class="fa fa-dashboard"></i> 控制台</a></li>
+        <li class="active">版本管理</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section>
-       <iframe frameborder="0" class="content-iframe" width="100%" style="min-height: 850px;" marginheight="0" marginwidth="0" scrolling="yes" 
-	   
-	   src="pages/tables/data.html">
-	   </iframe>
+       <!--  <iframe frameborder="0" class="content-iframe" width="100%" style="min-height: 850px;" marginheight="0" marginwidth="0" scrolling="yes" 
+	       src="pages/tables/data.html">
+	   </iframe>  -->
 	   <!-- src="http://www.sina.com.cn"> -->
-	   <!-- <div id="work"></div>-->
+	   <div id="contentDiv" ng-view></div>
     </section>
     <!-- /.content -->
   </div>
@@ -432,15 +456,15 @@
   </footer>
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
+<!--   <aside class="control-sidebar control-sidebar-dark">
+    Create the tabs
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
       <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
     </ul>
-    <!-- Tab panes -->
+    Tab panes
     <div class="tab-content">
-      <!-- Home tab content -->
+      Home tab content
       <div class="tab-pane" id="control-sidebar-home-tab">
         <h3 class="control-sidebar-heading">Recent Activity</h3>
         <ul class="control-sidebar-menu">
@@ -489,7 +513,7 @@
             </a>
           </li>
         </ul>
-        <!-- /.control-sidebar-menu -->
+        /.control-sidebar-menu
 
         <h3 class="control-sidebar-heading">Tasks Progress</h3>
         <ul class="control-sidebar-menu">
@@ -542,14 +566,14 @@
             </a>
           </li>
         </ul>
-        <!-- /.control-sidebar-menu -->
+        /.control-sidebar-menu
 
       </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
+      /.tab-pane
+      Stats tab content
       <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
+      /.tab-pane
+      Settings tab content
       <div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
@@ -564,7 +588,7 @@
               Some information about this general settings option
             </p>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -576,7 +600,7 @@
                Other sets of options are available
             </p>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -588,7 +612,7 @@
               Allow the user to show his name in blog posts
             </p>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <h3 class="control-sidebar-heading">Chat Settings</h3>
 
@@ -598,7 +622,7 @@
               <input type="checkbox" class="pull-right" checked>
             </label>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -606,7 +630,7 @@
               <input type="checkbox" class="pull-right">
             </label>
           </div>
-          <!-- /.form-group -->
+          /.form-group
 
           <div class="form-group">
             <label class="control-sidebar-subheading">
@@ -614,12 +638,12 @@
               <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
             </label>
           </div>
-          <!-- /.form-group -->
+          /.form-group
         </form>
       </div>
-      <!-- /.tab-pane -->
+      /.tab-pane
     </div>
-  </aside>
+  </aside> -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
@@ -630,40 +654,193 @@
 <!-- jQuery 2.2.3 -->
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="plugins/jQueryUI/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
+
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="plugins/morris/morris.min.js"></script>
+<!-- Morris.js charts Raphael 是一个用于在网页中绘制矢量图形的 Javascript 库-->
+<script src="plugins//raphael/raphael-min.js"></script>
 
-<!-- Sparkline -->
+<!-- Morris.js 是一个轻量级的 JS 库，使用 jQuery 和 Rapha&euml;l 来生成各种时序图 -->
+<!-- <script src="plugins/morris/morris.js"></script> -->
+
+<!-- Sparkline jQuery线状图插件Sparkline-->
 <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
+<!-- jvectormap jQuery地图插件 -->
 <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- jQuery Knob Chart -->
+<!-- jQuery Knob Chart 旋钮插件jQuery knob-->
 <script src="plugins/knob/jquery.knob.js"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<!-- moment.js JavaScript 日期处理类库 -->
+<script src="plugins/moment/moment.min.js"></script>
+
+<!-- fullCalendar 2.2.5 -->
+<script src="plugins/fullcalendar/fullcalendar.min.js"></script>
+<!-- jQuery Date Range Picker是一款允许用户选择一个日期时间范围的jQuery日期选择器插件 -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- datepicker -->
+<!-- datepicker 日期选择插件-->
 <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
-<!-- Bootstrap WYSIHTML5 -->
+<!-- Bootstrap WYSIHTML5 富文本编辑器 -->
 <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
+<!-- Slimscroll 可自定义程度很高的虚拟滚动条插件 -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
+<!-- FastClick 是一个简单，易于使用的JS库用于消除在移动浏览器上触发click事件与一个物理Tap(敲击)之间的300延迟 -->
 <script src="plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/app.min.js"></script>
+<script src="dist/js/app.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+<!-- <script src="dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- angularJs -->
+<script src="plugins/angularjs/angular.min.js"></script>
+<script src="dist/js/tm.pagination.js"></script>
+<script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+
+<script src="dist/js/versionList.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+  
+ <script src="dist/lang/en_US.js?v=v1"></script>
+<script src="dist/lang/zh_CN.js?v=v1"></script>
+<!-- <div ng-app="myApp" ng-controller="myCtrl">
+    名字: <input ng-model="name">
+</div> -->
+<script>
+ /*  $.widget.bridge('uibutton', $.ui.button); */
+/*   var url="pages/tables/data.html";
+  $.get(url,function(data){
+　　　　　$("#iframe").html(data); 
+　 }); */
+ var path = "<%=path%>";
+ var App = angular.module('myApp', ['ngRoute','tm.pagination']);
+ var source = en_source;
+ 
+ 
+ //3 配置路由模块，使其正常工作  
+ App.config(['$routeProvider', function ($routeProvider) {  
+	 console.log(JSON.stringify($routeProvider));
+     $routeProvider.when('/index', {  
+         // template: '<h1>index Pages!</h1>',  
+         templateUrl: path+ '/pages/calendar.html'  
+     }) 
+     .when('/version/list', {  
+         // template: '<h1>contact US Pages!</h1>',  
+         templateUrl: path+ '/version/list',  
+         controllerAs: 'versionsCtrl' // 定义控制器  
+     })
+     .otherwise({templateUrl: '/pages/calendar.html'});
+     /* .otherwise({redirectTo:'/pages/calendar.html'}); */
+
+ }]);  
+ 
+ 
+	// 列表控制器  
+/*  App.controller('versionsCtrl', ['$scope', '$http', function ($scope, $http) {  
+     // 模型数据  
+     // $scope.items = ['html', 'css', 'js'];  
+
+	  console.log("11111111111111111111111111111111111111");
+
+ }]);  */
+	
+ App.controller('versionsCtrl', function($scope, $http) {
+	 console.log("5555555555555555555555555555555555555555");
+	 
+	  $scope.currentPage = 0;
+	  $scope.pageCount = 0;
+	  $scope.source = source;
+	  // $timeout(function(){},500);
+
+  	  $scope.doQuery = function() {
+	  		
+  		 $.post(path + "/version/list",
+  	  	   {
+  			  currentPage: $scope.paginationConf.currentPage,
+           pageSize : $scope.paginationConf.itemsPerPage
+  	  	    }).success(
+  	  	       function (response) {
+  	  	    	  //  Framework.Admin.detectLoginStatus(response);
+  	  	    	   $scope.versions = response.page.records;
+  	               $scope.paginationConf.totalItems = response.page.rowCount;
+  	  	    	   $scope.$apply();
+  	  	    	   // $timeout(function(){$scope.doUserPermissionQuery();},1);
+  	  	    }).error(function(data, status, headers, config) {
+  	  	          //  Framework.Admin.detectLoginStatus(JSON.parse(data.responseText).errorCode);
+  	      	});
+  	   };
+
+     // 配置分页基本参数
+     $scope.paginationConf = {
+         currentPage: 1,
+         itemsPerPage: 10
+     };
+     
+     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', $scope.doQuery);
+   // $scope.doQuery();
+});
+ 
+	
+ // console.log(JSON.stringify(App));
+ 
+ /* listIgoal("/pages/calendar.html"); */
+
+ 
+/*   function listIgoal(url){
+		$.get(path+url, function(data){
+		    // alert(data);
+			$('#contentDiv').html(data);
+		});
+	} */
+	
+
+	
+	
+	
+/* 	apps.controller('versionsCtrl', function($scope) {
+		  alert("123456");
+	      console.log("11111111111111111111111111111111111111");
+	
+		  $scope.currentPage = 0;
+		  $scope.pageCount = 0;
+		  $scope.source = source;
+		  // $timeout(function(){},500);
+
+	  	  $scope.doQuery = function() {
+		  		
+	  		 $.post(path + "/version/list",
+	  	  	   {
+	  			  currentPage: $scope.paginationConf.currentPage,
+               pageSize : $scope.paginationConf.itemsPerPage
+	  	  	    }).success(
+	  	  	       function (response) {
+	  	  	    	  //  Framework.Admin.detectLoginStatus(response);
+	  	  	    	   $scope.versions = response.page.records;
+	  	               $scope.paginationConf.totalItems = response.page.rowCount;
+	  	  	    	   $scope.$apply();
+	  	  	    	   // $timeout(function(){$scope.doUserPermissionQuery();},1);
+	  	  	    }).error(function(data, status, headers, config) {
+	  	  	          //  Framework.Admin.detectLoginStatus(JSON.parse(data.responseText).errorCode);
+	  	      	});
+	  	   };
+
+	     // 配置分页基本参数
+	     $scope.paginationConf = {
+	         currentPage: 1,
+	         itemsPerPage: 50
+	     };
+	     
+     $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', $scope.doQuery);
+	   // $scope.doQuery();
+
+	});  */
+	
+	
+</script>
 </body>
 </html>
