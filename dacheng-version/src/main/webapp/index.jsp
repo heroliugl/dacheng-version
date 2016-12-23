@@ -732,7 +732,7 @@
      .when('/version/list', {  
          // template: '<h1>contact US Pages!</h1>',  
          templateUrl: path+ '/version/list',  
-         controllerAs: 'versionsCtrl' // 定义控制器  
+         controller: 'versionsCtrl' // 定义控制器  
      })
      .otherwise({templateUrl: '/pages/calendar.html'});
      /* .otherwise({redirectTo:'/pages/calendar.html'}); */
