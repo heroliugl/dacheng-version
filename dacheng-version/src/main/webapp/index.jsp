@@ -24,6 +24,7 @@
   
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.css">
+    <link rel="stylesheet" href="dist/css/page_list.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
 <!--   <link rel="stylesheet" href="dist/css/skins/_all-skins.css"> -->
@@ -50,12 +51,12 @@
   
   
   <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
-  
+  <link rel="stylesheet" href="plugins/angular-datatables/css/angular-datatables.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini" ng-app="myApp">
-<div class="wrapper">
-
-  <header class="main-header">
+<div class="wrapper" >
+  <div ng-controller="mainHeaderController">
+  <header class="main-header" >
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -70,9 +71,15 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
 
-      <div class="navbar-custom-menu">
+      <div class="navbar-custom-menu" >
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
+          <li class="dropdown messages-menu">
+            
+            <a href="#" >
+              <span class="hidden-xs"><strong>{{current}}</strong></span>
+            </a> 
+          </li>
           <li class="dropdown messages-menu">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
@@ -316,8 +323,8 @@
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <!-- Left side column. contains the logo and sidebar  ng-controller="mainSidebarController"-->
+  <aside class="main-sidebar" >
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -420,38 +427,26 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-
+</div>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Dashboard
-        <small>Control panel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#/index"><i class="fa fa-dashboard"></i> 控制台</a></li>
-        <li class="active">版本管理</li>
-      </ol>
-    </section>
-
     <!-- Main content -->
-    <section>
+ 
        <!--  <iframe frameborder="0" class="content-iframe" width="100%" style="min-height: 850px;" marginheight="0" marginwidth="0" scrolling="yes" 
 	       src="pages/tables/data.html">
 	   </iframe>  -->
 	   <!-- src="http://www.sina.com.cn"> -->
-	   <div id="contentDiv" ng-view></div>
-    </section>
+	   <div id="contentDiv" ui-view></div>
+   
     <!-- /.content -->
   </div>
   
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.6
+      <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    <strong>Copyright &copy; 2014-2016 <a href="http://www.dosapi.cn" target="_blank">Dacheng</a>.</strong> All rights
     reserved.
   </footer>
 
@@ -650,7 +645,8 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
+ <script src="dist/lang/en_US.js?v=v1"></script>
+<script src="dist/lang/zh_CN.js?v=v1"></script>
 <!-- jQuery 2.2.3 -->
 <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -691,39 +687,121 @@
 <!-- FastClick 是一个简单，易于使用的JS库用于消除在移动浏览器上触发click事件与一个物理Tap(敲击)之间的300延迟 -->
 <script src="plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
+
+<!-- angularJs -->
+<script src="plugins/angularjs/angular.min.js"></script>
+<script src="plugins/angularjs/angular-ui-router.js"></script>
+<script src="plugins/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="plugins/ng-file-upload/ng-file-upload-shim.min.js"></script>
+<script src="dist/js/tm.pagination.js"></script>
+<!-- <script src="plugins/angularjs/angular-route.js"></script> -->
+<script src="plugins/angular-datatables/angular-datatables.js"></script>
+<!-- DataTables -->
 <script src="dist/js/app.js"></script>
+<script src="dist/js/index.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
-<!-- angularJs -->
-<script src="plugins/angularjs/angular.min.js"></script>
-<script src="dist/js/tm.pagination.js"></script>
-<script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
-
-<script src="dist/js/versionList.js"></script>
-<!-- DataTables -->
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
   
- <script src="dist/lang/en_US.js?v=v1"></script>
-<script src="dist/lang/zh_CN.js?v=v1"></script>
-<!-- <div ng-app="myApp" ng-controller="myCtrl">
-    名字: <input ng-model="name">
-</div> -->
+<script src="dist/js/versionList.js"></script>
+<script src="dist/js/versionAdd.js"></script>
+ <script type="text/javascript">
+  var path = "<%=path%>";
+  var source = en_source;
+ </script>
 <script>
  /*  $.widget.bridge('uibutton', $.ui.button); */
 /*   var url="pages/tables/data.html";
-  $.get(url,function(data){
+   $.get(url,function(data){
 　　　　　$("#iframe").html(data); 
 　 }); */
- var path = "<%=path%>";
- var App = angular.module('myApp', ['ngRoute','tm.pagination']);
- var source = en_source;
+ /* var App = angular.module('myApp', ['ngRoute','tm.pagination']); */
+/*  var App = angular.module('myApp', ['ui.router','tm.pagination']); */
  
  
- //3 配置路由模块，使其正常工作  
- App.config(['$routeProvider', function ($routeProvider) {  
+ /* 注入$stateProvider，$urlRouterProvider */
+ /*  App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $urlRouterProvider ) {
+  
+     // 使用when来对一些不合法的路由进行重定向 
+     $urlRouterProvider.when('', '/index');
+  
+     // 通过$stateProvider的state()函数来进行路由定义 
+     $stateProvider.state('index', {
+         url: '/index',
+         templateUrl: path+ '/pages/calendar.html' 
+        //  controller: 'MainCtrl'
+     }).state('version/list', {
+         url: '/version/list',
+         templateUrl: path+ '/version/list', 
+         controller: 'versionsCtrl'
+     })
+  
+     $stateProvider.state('404', {
+         url: '/404',
+         templateUrl: '404.html'
+     })
+ }]); */
+ 
+ /* App.directive('validFile',function(){
+        return {
+          require:'ngModel',
+          link:function(scope,el,attrs,ngModel){
+            //change event is fired when file is selected
+            el.bind('change',function(){
+              scope.$apply(function(){
+                ngModel.$setViewValue(el.val());
+                ngModel.$render();
+              });
+            });
+          }
+        }
+});
+
+ App.directive('fileModel', ['$parse', function ($parse) {
+  return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+          var model = $parse(attrs.fileModel);
+          var modelSetter = model.assign;
+
+          element.bind('change', function(){
+              scope.$apply(function(){
+                  modelSetter(scope, element[0].files[0]);
+              });
+          });
+      }
+  };
+}]);
+
+ App.directive('maxFileSize', function() {
+return {
+ require: 'ngModel',
+  link: function(scope, elem, attr, ctrl) {
+    function bindEvent(element, type,attr,ctrl,scope, handler) {
+      if (element.addEventListener) {
+        element.addEventListener(type, handler, false);
+      } else {
+        element.attachEvent('on' + type, handler);
+      }
+    }
+
+    bindEvent(elem[0], 'change',attr,ctrl,scope ,function() {
+      if(this.files[0].size > attr.maxFileSize ){
+          ctrl.$setValidity('maxFileSize', false);
+      }else{
+          ctrl.$setValidity('maxFileSize', true);
+      }
+      scope.$apply()
+    });
+  }
+}
+}); */
+ 
+  //3 配置路由模块，使其正常工作  
+/*  App.config(['$routeProvider', function ($routeProvider) {  
 	 console.log(JSON.stringify($routeProvider));
      $routeProvider.when('/index', {  
          // template: '<h1>index Pages!</h1>',  
@@ -734,10 +812,10 @@
          templateUrl: path+ '/version/list',  
          controller: 'versionsCtrl' // 定义控制器  
      })
-     .otherwise({templateUrl: '/pages/calendar.html'});
-     /* .otherwise({redirectTo:'/pages/calendar.html'}); */
+     .otherwise({templateUrl:  path+ '/pages/calendar.html'});
+     // .otherwise({redirectTo:'/pages/calendar.html'}); 
 
- }]);  
+ }]);  */
  
  
 	// 列表控制器  
@@ -749,15 +827,15 @@
 
  }]);  */
 	
- App.controller('versionsCtrl', function($scope, $http) {
+/*  App.controller('versionsCtrl', function($scope, $http) {
 	 console.log("5555555555555555555555555555555555555555");
 	 
 	  $scope.currentPage = 0;
-	  $scope.pageCount = 0;
+	  $scope.pageCount = 0; 
 	  $scope.source = source;
 	  // $timeout(function(){},500);
 
-  	  $scope.doQuery = function() {
+ 	  $scope.doQuery = function() {
 	  		
   		 $.post(path + "/version/list",
   	  	   {
@@ -784,7 +862,7 @@
      $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', $scope.doQuery);
    // $scope.doQuery();
 });
- 
+  */
 	
  // console.log(JSON.stringify(App));
  
@@ -802,7 +880,7 @@
 	
 	
 	
-/* 	apps.controller('versionsCtrl', function($scope) {
+/* 	 apps.controller('versionsCtrl', function($scope) {
 		  alert("123456");
 	      console.log("11111111111111111111111111111111111111");
 	

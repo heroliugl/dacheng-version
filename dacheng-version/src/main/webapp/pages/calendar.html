@@ -11,8 +11,20 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#/index"><i class="fa fa-dashboard"></i> 控制台</a></li>
+        <li class="active">日历</li>
+      </ol>
+    </section>
+<!-- Main content -->
 <!-- ./wrapper -->
+<section>
 <div class="row">
         <div class="col-md-3">
           <div class="box box-solid">
@@ -87,7 +99,7 @@
         </div>
         <!-- /.col -->
       </div>
-
+</section>
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -139,7 +151,7 @@
       },
       //Random default events
       events: [
-        {
+  /*       {
           title: 'All Day Event',
           start: new Date(y, m, 1),
           backgroundColor: "#f56954", //red
@@ -182,7 +194,7 @@
           url: 'http://google.com/',
           backgroundColor: "#3c8dbc", //Primary (light-blue)
           borderColor: "#3c8dbc" //Primary (light-blue)
-        }
+        } */
       ],
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!

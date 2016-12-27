@@ -28,6 +28,12 @@ public class VersionController extends BaseController{
         return "/version/versionList";
     }
     
+	
+    @RequestMapping(value="/add", method = RequestMethod.GET)
+    public String add() {
+        return "/version/versionAdd";
+    }
+    
     @RequestMapping(value="/list", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> list(@RequestParam(value = "currentPage", defaultValue = "0") int currentPage
@@ -37,6 +43,22 @@ public class VersionController extends BaseController{
     		 PageView<Version> pageView = versionService.findPage(currentPage, pageSize, version);
     		 map.put("code", 0);
  			map.put("page", pageView);
+		} catch (Exception e) {
+			// TODO: handle exception
+			map.put("code", -1);
+			map.put("page", null);
+		}
+        return map;
+    }
+    
+    @RequestMapping(value="/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> add(String log) {
+    	 Map<String, Object> map = new HashMap<String, Object>();
+    	 try {
+    		 System.out.println("log : "+log);
+    		 map.put("code", 0);
+ 			map.put("page", log);
 		} catch (Exception e) {
 			// TODO: handle exception
 			map.put("code", -1);

@@ -16,6 +16,35 @@ if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
 }
 
+// UI.router
+var App = angular.module('myApp', ['ui.router','tm.pagination','ngFileUpload']);
+
+/* 注入$stateProvider，$urlRouterProvider */
+App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $urlRouterProvider ) {
+ 
+    /* 使用when来对一些不合法的路由进行重定向 */
+    $urlRouterProvider.when('', '/index');
+ 
+    /* 通过$stateProvider的state()函数来进行路由定义 */
+    $stateProvider.state('index', {
+        url: '/index',
+        templateUrl: path+ '/pages/calendar.html' 
+       //  controller: 'MainCtrl'
+    }).state('version/list', {
+        url: '/version/list',
+        templateUrl: path+ '/version/list', 
+        controller: 'versionsCtrl'
+    }).state('version/add', {
+        url: '/version/add',
+        templateUrl: path+ '/version/add', 
+        controller: 'versionsAddCtrl'
+    })
+ 
+    $stateProvider.state('404', {
+        url: '/404',
+        templateUrl: '404.html'
+    })
+}]);
 /* AdminLTE
  *
  * @type Object
