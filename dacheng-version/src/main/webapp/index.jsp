@@ -30,7 +30,8 @@
 <!--   <link rel="stylesheet" href="dist/css/skins/_all-skins.css"> -->
   <link rel="stylesheet" href="dist/css/skins/_all-skins.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+<!--   <link rel="stylesheet" href="plugins/iCheck/flat/blue.css"> -->
+  <link rel="stylesheet" href="plugins/iCheck/all.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="plugins/morris/morris.css">
   <!-- jvectormap -->
@@ -58,7 +59,7 @@
   <div ng-controller="mainHeaderController">
   <header class="main-header" >
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>DC</b>-V</span>
       <!-- logo for regular state and mobile devices -->
@@ -275,9 +276,9 @@
           </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">Admin</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -285,7 +286,7 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  Admin - Web Administrator
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -333,7 +334,7 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Administrator</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -363,7 +364,15 @@
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul> -->
         </li>
-        <li class="treeview">
+        <li>
+          <a href="#/version/list">
+            <i class="fa fa-files-o"></i> <span>版本管理</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green"></small>
+            </span>
+          </a>
+        </li>
+        <!-- <li class="treeview">
           <a href="javascript:void(0)">
             <i class="fa fa-files-o"></i>
             <span>版本管理</span>
@@ -377,7 +386,7 @@
             <li><a href="/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> 床垫</a></li>
             <li><a href="/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 其他</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="treeview">
 	          <a href="#">
 	            <i class="fa fa-pie-chart"></i>
@@ -691,6 +700,9 @@
 <!-- angularJs -->
 <script src="plugins/angularjs/angular.min.js"></script>
 <script src="plugins/angularjs/angular-ui-router.js"></script>
+<script src="plugins/angular-file-upload/angular-file-upload.js"></script>
+<script src="plugins/angular-file-upload/es5-shim.min.js"></script>
+<script src="plugins/angular-file-upload/es5-sham.min.js"></script>
 <script src="plugins/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="plugins/ng-file-upload/ng-file-upload-shim.min.js"></script>
 <script src="dist/js/tm.pagination.js"></script>
@@ -699,6 +711,7 @@
 <!-- DataTables -->
 <script src="dist/js/app.js"></script>
 <script src="dist/js/index.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->

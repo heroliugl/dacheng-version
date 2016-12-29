@@ -17,7 +17,7 @@ if (typeof jQuery === "undefined") {
 }
 
 // UI.router
-var App = angular.module('myApp', ['ui.router','tm.pagination','ngFileUpload']);
+var App = angular.module('myApp', ['ui.router','tm.pagination','angularFileUpload','ngFileUpload']);
 
 /* 注入$stateProvider，$urlRouterProvider */
 App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $urlRouterProvider ) {

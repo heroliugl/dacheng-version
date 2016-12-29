@@ -6,27 +6,27 @@
 <!-- 用户Dao接口 -->
 <mapper namespace="com.dacheng.mapper.UserMapper">
 	<!-- 查询所有用户信息 -->
-	<select id="queryUsers" resultType="User">
+<!-- 	<select id="queryUsers" resultType="User">
 		select * from users
 	</select>
 	
-	<!-- 保存用户信息 -->
+	保存用户信息
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userid">  
 	    insert into users(userid, loginname, nickname, email, password, sex, createtime, status,isRegisterUser)  
 	    values(#{userid}, #{loginname}, #{nickname}, #{email}, #{password}, #{sex}, now(), 1, #{isRegisterUser})  
 	</insert>  
 	
-	<!-- 根据登录名和密码查询用户 -->
+	根据登录名和密码查询用户
 	<select id="queryUserByLoginnameAndPassword" resultType="User">
 		select * from users where loginname = #{loginname} and password = #{password}
 	</select>
 	
-	<!-- 根据登录名查询用户 -->
+	根据登录名查询用户
 	<select id="queryUserByLoginname" resultType="User">
 		select * from users where loginname = #{loginname}
 	</select>
 	
-	<!-- 根据用户ID更新用户头像地址 -->
+	根据用户ID更新用户头像地址
 	<update id="updateUserHeadurlByUserid">
 		update users 
 		<set>
@@ -38,12 +38,12 @@
 		</selectKey>
 	</update>
 		
-	<!-- 根据用户ID查询用户 -->
+	根据用户ID查询用户
 	<select id="queryUserByUserid" resultType="User">
 		select * from users where userid = #{userid}
 	</select>
 	
-	<!-- 根据用户ID更新油价 -->
+	根据用户ID更新油价
 	<update id="updateFuelpriceByUserid">
 		update users 
 		<set>
@@ -55,7 +55,7 @@
 		</selectKey>
 	</update>
 	
-	<!-- 根据用户登录名更新密码 -->
+	根据用户登录名更新密码
 	<update id="updatePasswordByLoginname">
 		update users 
 		<set>
@@ -78,7 +78,7 @@
 	    where userid=#{userid}
 	</update>
 	
-	<!-- 根据用户名更新邮箱地址 -->
+	根据用户名更新邮箱地址
 	<update id="updateEmailByLoginname">
 		update users
 		<set>
@@ -88,5 +88,5 @@
 		<selectKey resultType="int" keyProperty="userid"  order="AFTER">
 			select LAST_INSERT_ID()
 		</selectKey>
-	</update>
+	</update> -->
 </mapper>

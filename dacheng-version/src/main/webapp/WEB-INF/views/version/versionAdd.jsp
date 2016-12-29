@@ -21,16 +21,25 @@
     border: 1px solid #2c6533;
     border-radius: 4px;
     overflow: hidden;
-    display: inline;
-    /* *display: inline;
-    *zoom: 1 */
+    display: inline-block;
+    margin-top:3px;
+    *display: inline;
+    *zoom: 1 
 }
 .a-upload  input{
     position: absolute;
+    width:100%;
+    cursor: pointer;
     left: 0;
     top: 0;
     opacity: 0;
 }
+
+            .my-drop-zone { border: dotted 3px lightgray; width: 300px;height: 180px;line-height:150px;text-align: center;text-v}
+            .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+            .another-file-over-class { border: dotted 3px green; }
+
+      
 </style>
     
     <!-- Content Header (Page header) -->
@@ -60,60 +69,83 @@
               <div class="box-body">
               
               <div class="form-group">
-                  <label>产品名称</label>
-                  <select class="form-control" style="width: 500px;">
-                    <option value="Battery_Monitor">Battery_Monitor</option>
+                  <label for="ptype">产品类型</label>
+                  <select class="form-control" style="width: 500px;" ng-model="ptype" name="ptype">
+                     <option value="BM2">BM2</option>
                   </select>
-                </div>
+              </div>
+              
               <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <br>
-                  <input class="filename" type="text" readonly="readonly" value="{{em_floormap}}" />
-                   <a href="javascript:;" class="a-upload">
-                          <input type="file" file-model="myFile" ngf-select="getFileInfo()" ng-model="em_floormap" name="floormap" 
-                                  max-file-size="16777215" valid-file> 选择文件
-					</a>
+                <label for="vtype">程序类型</label><br>
+                <label>
+                <!--  disabled="disabled" -->
+                  <input type="radio" name="vtype" ng-model="vtype" value="1" class="flat-red iradio_flat-green" disabled="disabled">Android程序&nbsp;&nbsp;
+                </label>
+                <label>
+                  <input type="radio" name="vtype" ng-model="vtype" value="2" class="flat-red iradio_flat-green" >固件升级包
+                </label>
+              </div>
+     
+              <div class="form-group" >
+                  <label for="inputFile">版本程序包</label>
+                  <input type="text"  class="filename form-control" readonly="readonly" value="{{fileName}}" />
+                   <!-- <a href="javascript:;" class="a-upload"> --><!-- ng-click="clearItems()" -->
+                        <input type="file" nv-file-select uploader="uploader"/>浏览
+				  <!--  </a> -->
+				   <button type="button" class="btn btn-primary" ng-click="getFile()">getFile</button>
                 </div>
                 
+                
+               <div class="form-group" >
+                  <label for="inputFile">版本程序包</label>
+                  <input type="text"  class="filename form-control" readonly="readonly" ng-model="fileName" value="{{file.name}}" />
+                  <!-- ngf-pattern="'image/*" accept="image/*" -->
+                   <div class="btn btn-primar" ngf-select ng-model="file" name="file" ng-change="checkFile()" ngf-max-size="20MB" ngf-min-height="100">Select</div>
+				   <button type="button" class="btn btn-primary" ng-click="checkFile()">checkFile</button>{{fileInfo.name}}<br/>
+        {{fileInfo.size}}
+                </div>
+       
                 <div class="form-group">
-                  <label>版本类型</label>
-                  <select class="form-control" style="width: 500px;">
-                    <option value="BM2">BM2</option>
-                    <option value="OBD">OBD</option>
-                    <option>option 3</option>
-                    <option>option 4</option>
-                    <option>option 5</option>
-                  </select>
+                  <label for="vname">版本名称</label>
+                  <input type="text" class="form-control" ng-model="vname" style="width: 500px;" 
+                         readonly="readonly" autocomplete="off" placeholder="此信息从文件中获取">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputEmail1">版本名称</label>
-                  <input type="email" class="form-control" style="width: 500px;" autocomplete="off" placeholder="Enter Text">
+                  <label for="vflag">版本标注</label>
+                  <input type="text" class="form-control" ng-model="vflag" style="width: 500px;" 
+                         readonly="readonly" autocomplete="off" placeholder="此信息从文件中获取">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">版本类型</label>
-                   <input type="email" class="form-control" style="width: 500px;" autocomplete="off" placeholder="Enter Text">
+                  <label for="vm">版本号</label>
+                   <input type="text" class="form-control" ng-model="vm" style="width: 500px;" 
+                          readonly="readonly" autocomplete="off" placeholder="此信息从文件中获取">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">版本号</label>
-                   <input type="email" class="form-control" style="width: 500px;" autocomplete="off" placeholder="Enter Text">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">版本说明</label>
-	                <textarea class="textarea" placeholder="Place some text here" ng-model="textarea" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-            </div>
-                <div class="checkbox">
+                    <label for="exampleInputPassword1" >版本说明</label>
+                    <br>(中文)<br>
+	                <textarea class="textarea" placeholder="在这里输入版本说明" ng-model="cnlog" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+	                <br>(English)<br>
+	                <textarea class="textarea" placeholder="Place some text here" ng-model="enlog" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+               </div>
+               <div class="form-group">
+                <label for="forceUpdate">是否强制升级</label><br>
+                <label>
+                  <input type="radio" name="forceUpdate" ng-model="forceUpdate" value="1" class="flat-red iradio_flat-green" >是&nbsp;&nbsp;
+                </label>
+                <label>
+                  <input type="radio" name="forceUpdate" ng-model="forceUpdate" value="0" class="flat-red iradio_flat-green" >否
+                </label>
+              </div>
+             <!--    <div class="checkbox">
                   <label>
                     <input type="checkbox"> Check me out
                   </label>
-                </div>
+                </div> -->
               </div>
               <!-- /.box-body -->
-              
-
               <div class="box-footer">
-                <button type="button" class="btn btn-default" ng-click="getTextArea();">获取</button>
-              
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-primary" ng-click="UploadFile()">UploadFile</button>
+                <button type="button" class="btn btn-primary" ng-click="submit()">submit</button>
               </div>
             </form>
           </div>
@@ -123,3 +155,10 @@
 	</div>
 	<!-- /.row -->
 </section>
+<script>
+/* $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    checkboxClass: 'icheckbox_flat-green',
+    radioClass: 'iradio_flat-green'
+  }); */
+
+</script>

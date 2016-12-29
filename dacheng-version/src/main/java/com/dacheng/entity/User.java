@@ -12,6 +12,7 @@ public class User {
 	private String fuelprice;
 	private int status;
 	private int isRegisterUser;
+	
 	public int getUserid() {
 		return userid;
 	}

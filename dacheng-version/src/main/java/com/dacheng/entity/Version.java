@@ -7,7 +7,7 @@ public class Version {
 	private Long id;
 	private String vname;  // 版本名称，eg:OBD_A_1.0.1
 	private String ptype;  // 产品类型，eg:OBD、BM
-	private String vtype;  // 版本类型，eg:1、
+	private String vtype;  // 版本程序类型，eg:1:APP 2:固件
 	private String ostype; // 使用操作系统，eg:Android / IOS
 	private String vflag;  // 版本补充标记，eg:A / B
 	private String vlog;   // 版本描述

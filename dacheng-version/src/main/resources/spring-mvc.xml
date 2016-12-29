@@ -11,7 +11,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<!-- <context:component-scan base-package="com.dacheng.controller" /> -->
-
+     <context:property-placeholder location="classpath:service.properties" />
 	
 	<!-- 开启注解 -->
 	<context:component-scan base-package="com.dacheng">
@@ -68,4 +68,8 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+</bean>
 </beans>

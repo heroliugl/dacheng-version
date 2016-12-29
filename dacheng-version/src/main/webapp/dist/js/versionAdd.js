@@ -1,87 +1,171 @@
   $(function () {
 	
+	
   });
-  
-  App.directive('validFile',function(){
-      return {
-        require:'ngModel',
-        link:function(scope,el,attrs,ngModel){
-          //change event is fired when file is selected
-          el.bind('change',function(){
-            scope.$apply(function(){
-              ngModel.$setViewValue(el.val());
-              ngModel.$render();
-            });
-          });
-        }
-      }
-});
 
-App.directive('fileModel', ['$parse', function ($parse) {
-return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-        var model = $parse(attrs.fileModel);
-        var modelSetter = model.assign;
-
-        element.bind('change', function(){
-            scope.$apply(function(){
-                modelSetter(scope, element[0].files[0]);
-            });
-        });
-    }
-};
-}]);
-
-App.directive('maxFileSize', function() {
-return {
-require: 'ngModel',
-link: function(scope, elem, attr, ctrl) {
-  function bindEvent(element, type,attr,ctrl,scope, handler) {
-    if (element.addEventListener) {
-      element.addEventListener(type, handler, false);
-    } else {
-      element.attachEvent('on' + type, handler);
-    }
-  }
-
-  bindEvent(elem[0], 'change',attr,ctrl,scope ,function() {
-    if(this.files[0].size > attr.maxFileSize ){
-        ctrl.$setValidity('maxFileSize', false);
-    }else{
-        ctrl.$setValidity('maxFileSize', true);
-    }
-    scope.$apply()
-  });
-}
-}
-});
-  
-  App.controller('versionsAddCtrl', function($scope, $http,Upload) {
+  App.controller('versionsAddCtrl', function($scope, $http,FileUploader,Upload) {
    	  console.log("5555555555555555555555555555555555555555");
    	  $scope.source = source;
-   	  $scope.textarea = "112233\n12312321";
    	  
-   	  
-   	  
-   	//提交
-   	 /*$scope.getFile = function () {
-   		 // alert("12312312");
-   		 var file = $scope.myFile;
-         console.log("file.name"+file.name);
-     };*/
+   	  $scope.vtype="2";
+   	  $scope.forceUpdate="0";
+   	var versionInfo = [];
+   	var uploader = $scope.uploader = new FileUploader({
+        url: path + "/version/add",
+        queueLimit: 1,     //文件个数 
+        removeAfterUpload: false   //上传后删除文件
+    });
+   	
+   	
+   	$scope.clearItems = function(){    //重新选择文件时，清空队列，达到覆盖文件的效果
+   		console.log("clearItems");
+   		var ss= $scope.upFiles;
+   	 console.log(JSON.stringify("ss "+ss));
+      //  uploader.clearQueue();
+        $scope.fileName = "";
+    }
+   	
+   	$scope.getFile = function(){    //重新选择文件时，清空队列，达到覆盖文件的效果
+   		console.log("getFile");
+   	    uploader.clearQueue();
+    }
+   	
+   	
+   	
+   
+   	// 选中文件
+    uploader.onAfterAddingFile = function(fileItem) {
+    	console.log("onAfterAddingFile");
+    	console.log(fileItem._file);
+    	
+    	$scope.fileName = fileItem._file.name;
+    	$scope.getFileInfo();
+       // $scope.fileItem = fileItem._file;    //添加文件之后，把文件信息赋给scope
+    };
+    
+    
+    uploader.onBeforeUploadItem = function(item) {
+        console.info('onBeforeUploadItem', item);
+        // 其他参数设置
+        var param = {
+        		"vname":$scope.vname,
+        		"vm":$scope.vm,
+        		"ptype":$scope.ptype,
+        		"vtype":$scope.vtype,
+        		"vflag":$scope.vflag,
+        		"vm":$scope.vm,
+        		"cnlog":$scope.cnlog,
+        		"enlog":$scope.enlog,
+        		"forceUpdate":$scope.forceUpdate
+        }
+        console.log("ptype"+$scope.ptype);
+        console.log("forceUpdate"+$scope.forceUpdate);
+        console.log("param : "+JSON.stringify(param));
+        versionInfo.push(param);
+       Array.prototype.push.apply(item.formData, versionInfo);
+    };
+    
+    uploader.onProgressItem = function(fileItem, progress) {
+        console.info('onProgressItem', fileItem, progress);
+    };
+    
+    uploader.onProgressAll = function(progress) {
+        console.info('onProgressAll', progress);
+    };
+  
+    uploader.onSuccessItem = function(fileItem, response, status, headers) {
+       // $scope.uploadStatus = true;   //上传成功则把状态改为true
+    	console.info('onSuccessItem', fileItem, response, status, headers);
+    };
+    
+    uploader.onErrorItem = function(fileItem, response, status, headers) {
+        console.info('onErrorItem', fileItem, response, status, headers);
+    };
+    
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        console.info('onCompleteItem', fileItem, response, status, headers);
+    };
+    
+    uploader.onCompleteAll = function() {
+        console.info('onCompleteAll');
+        this.clearQueue();
+    };
+    
+    console.info('uploader', uploader);
+
+    $scope.UploadFile = function(){
+    	console.log("UploadFile  --- --- --- ");
+    	
+        uploader.uploadAll();
+        console.info('uploader', uploader);
+        
+        
+        /*if(status){
+            if(status1){
+                alert('上传成功！');
+            }else{
+                alert('证书成功！私钥失败！');
+            }
+       }else{
+            if(status1){
+               alert('私钥成功！证书失败！');
+            }else{
+               alert('上传失败！');
+            }
+       }*/
+    }
+    
+   	$scope.getFileInfo = function(){
+   		/*alert("123213");
+   		var file = $scope.myFile;
+   	    console.log("file =  "+file.name);*/
+   		var param={
+  				 fileName:$scope.fileName
+  		 }
+  		$.post(path + "/version/getVersionInfo",param).success(
+				   function (response) {
+					   $scope.vname = response.info.vname;
+					   $scope.vflag = response.info.vflag;
+					   $scope.vm = response.info.vm;
+					   $scope.$apply();
+					  console.log(JSON.stringify(response.info));
+					  
+			 });
+   		
+   	}
    	  
    	  
       $scope.submit = function () {
           $scope.upload($scope.file);
       };
+      
+      $scope.checkFile = function () {
+        var file = $scope.file;
+        $scope.fileInfo = file;
+        $scope.fileName=file.name
+        $scope.getFileInfo();
+        console.log("checkFile "+JSON.stringify(file.name));
+      };
+      
+      
       $scope.upload = function (file) {
-          $scope.fileInfo = file;
+          // $scope.fileInfo = file;
+          var param = {
+          		"vname":$scope.vname,
+          		"vm":$scope.vm,
+          		"ptype":$scope.ptype,
+          		"vtype":$scope.vtype,
+          		"vflag":$scope.vflag,
+          		"vm":$scope.vm,
+          		"cnlog":$scope.cnlog,
+          		"enlog":$scope.enlog,
+          		"forceUpdate":$scope.forceUpdate
+          }
           Upload.upload({
               //服务端接收
-              url: 'Ashx/UploadFile.ashx',
+              url: path + "/version/add",
               //上传的同时带的参数
-              data: {'username': $scope.username},
+              data: param,
               //上传的文件
               file: file
           }).progress(function (evt) {
@@ -91,7 +175,9 @@ link: function(scope, elem, attr, ctrl) {
           }).success(function (data, status, headers, config) {
               //上传成功
               console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-              $scope.uploadImg = data;
+              
+              console.log("Response "+JSON.stringify(data));
+             // $scope.uploadImg = data;
           }).error(function (data, status, headers, config) {
               //上传失败
               console.log('error status: ' + status);
@@ -111,11 +197,7 @@ link: function(scope, elem, attr, ctrl) {
 					  console.log(response);
 			 });
    	 }
-	   	$scope.getFileInfo = function(){
-	   		/*alert("123213");
-	   		var file = $scope.myFile;
-	   	    console.log("file =  "+file.name);*/
-	   	}
+
    	 
   });  
  
