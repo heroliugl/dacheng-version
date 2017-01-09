@@ -1,6 +1,7 @@
 package com.dacheng.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Version {
 	
@@ -10,15 +11,18 @@ public class Version {
 	private String vtype;  // 版本程序类型，eg:1:APP 2:固件
 	private String ostype; // 使用操作系统，eg:Android / IOS
 	private String vflag;  // 版本补充标记，eg:A / B
-	private String vlog;   // 版本描述
 	private Float vm;      // 版本号，用于版本比较
 	private String vcode;  // 保留
 	private Boolean forceUpdate; // 是否要求强制升级  true：是  false：否
 	private String url;    // 下载URL
-	private String status; // 状态
+	private String status; // 发布状态 0:未发布   1:测试通过且发布
+	private String testStatus; // 测试状态   1:测试通过   0:测试未通过或者未测试
 	private Integer downNum;  // 下载数量
 	private Date createTime;  // 创建时间
 	private Date updateTime;  // 更新时间
+	
+	
+	private List<VersionLog> logs;
 	
 	public Long getId() {
 		return id;
@@ -55,12 +59,6 @@ public class Version {
 	}
 	public void setVflag(String vflag) {
 		this.vflag = vflag;
-	}
-	public String getVlog() {
-		return vlog;
-	}
-	public void setVlog(String vlog) {
-		this.vlog = vlog;
 	}
 	public Float getVm() {
 		return vm;
@@ -110,11 +108,28 @@ public class Version {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+	
+	public String getTestStatus() {
+		return testStatus;
+	}
+	
+	public void setTestStatus(String testStatus) {
+		this.testStatus = testStatus;
+	}
+	
+	public List<VersionLog> getLogs() {
+		return logs;
+	}
+	public void setLogs(List<VersionLog> logs) {
+		this.logs = logs;
+	}
+	
 	@Override
 	public String toString() {
 		return "Version [id=" + id + ", vname=" + vname + ", ptype=" + ptype + ", vtype=" + vtype + ", ostype=" + ostype
-				+ ", vflag=" + vflag + ", vlog=" + vlog + ", vm=" + vm + ", vcode=" + vcode + ", forceUpdate="
-				+ forceUpdate + ", url=" + url + ", status=" + status + ", downNum=" + downNum + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + "]";
+				+ ", vflag=" + vflag + ", vm=" + vm + ", vcode=" + vcode + ", forceUpdate=" + forceUpdate + ", url="
+				+ url + ", status=" + status + ", testStatus=" + testStatus + ", downNum=" + downNum + ", createTime="
+				+ createTime + ", updateTime=" + updateTime + ", logs=" + logs + "]";
 	}
+
 }

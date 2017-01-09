@@ -62,5 +62,4 @@ public class ServiceConfig {
 	public void setValue(String key, String value) {
 		props.setProperty(key, value);
 	}
-	
 }

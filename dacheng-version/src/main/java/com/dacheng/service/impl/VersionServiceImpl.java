@@ -1,8 +1,6 @@
 package com.dacheng.service.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -32,6 +30,14 @@ public class VersionServiceImpl implements VersionService {
 	public Version findVersionById(Long id) throws Exception {
 		// TODO Auto-generated method stub
 		Version version = versionMapper.findVersionById(id);
+		return version;
+	}
+	
+	
+	@Override
+	public Version findVersionByVersion(String ptype, String vtype, Float vm, String vflag) throws Exception {
+		// TODO Auto-generated method stub
+		Version version = versionMapper.findVersionByVersion(ptype, vtype, vm, vflag);
 		return version;
 	}
 

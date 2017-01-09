@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.dacheng.entity.Version;
 import com.dacheng.entity.view.PageView;
+import com.dacheng.service.VersionLogService;
 import com.dacheng.service.VersionService;
 import com.github.pagehelper.PageInfo;
 
@@ -21,6 +22,9 @@ public class VersionTest {
 
     @Autowired
     private VersionService versionService;
+    
+    @Autowired
+    private VersionLogService versionLogService;
 
 
     @Test
@@ -85,6 +89,8 @@ public class VersionTest {
     public void testQuery() {
        try {
     	   Version version = versionService.findVersionById(1L);
+    	   version.setLogs(versionLogService.findVersionLogById(1L));
+    	   
     	   System.out.println(version.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

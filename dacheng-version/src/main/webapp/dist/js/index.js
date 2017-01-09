@@ -7,6 +7,10 @@ App.controller('mainHeaderController', function($scope, $http, $timeout) {
 		$timeout(function(){$scope.currentTime();},1000);
 	}
 	
+	$scope.toLogin = function(){
+		window.location.href = path + "/login";
+	}
+	
 	$scope.currentTime();
 	
 });

@@ -6127,7 +6127,7 @@ button.close {
   word-spacing: normal;
   word-wrap: normal;
   white-space: normal;
-  background-color: #fff;
+  background-color: #f00;
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   border: 1px solid #ccc;
@@ -6154,7 +6154,7 @@ button.close {
   padding: 8px 14px;
   margin: 0;
   font-size: 14px;
-  background-color: #f7f7f7;
+  background-color: #f00;
   border-bottom: 1px solid #ebebeb;
   border-radius: 5px 5px 0 0;
 }

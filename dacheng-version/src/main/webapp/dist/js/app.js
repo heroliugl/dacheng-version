@@ -16,8 +16,29 @@ if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
 }
 
+angular.module('ui.popover', [])
+.directive('popover', function () {
+    return {
+        restrict: 'A',
+        scope: {
+            popoverShow: '=',
+            popoverOptions: '@'
+        },
+        link: function (scope, element) {
+            element.popover(JSON.parse(scope.popoverOptions || '{ "placement": "top", "trigger": "manual" }'));
+            scope.$watch('popoverShow', function (show) {
+                if (show) {
+                    element.popover('show');
+                } else {
+                    element.popover('hide');
+                }
+            });
+        }
+    };
+});
+
 // UI.router
-var App = angular.module('myApp', ['ui.router','tm.pagination','angularFileUpload','ngFileUpload']);
+var App = angular.module('myApp', ['ui.router','tm.pagination','ngFileUpload','ui.popover']);
 
 /* 注入$stateProvider，$urlRouterProvider */
 App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $urlRouterProvider ) {
@@ -38,6 +59,10 @@ App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $
         url: '/version/add',
         templateUrl: path+ '/version/add', 
         controller: 'versionsAddCtrl'
+    }).state('help', {
+        url: '/help',
+        templateUrl: path+ '/pages/help.html' 
+       //  controller: 'MainCtrl'
     })
  
     $stateProvider.state('404', {
@@ -421,15 +446,14 @@ function _init() {
       .on('click', menu + ' li a', function (e) {
         //Get the clicked link and the next element
         var $this = $(this);
+        console.log("$this"+$this);
         var checkElement = $this.next();
-        /*alert("21312");
-        alert(checkElement.is('.treeview-menu'));
-        alert(checkElement.is(':visible'));
-        alert(!$('body').hasClass('sidebar-collapse'));*/
+        console.log("checkElement"+checkElement);
+        console.log("(checkElement.is('.treeview-menu')"+(checkElement.is('.treeview-menu')));
+        
         //Check if the next element is a menu and is visible
         if ((checkElement.is('.treeview-menu')) && (checkElement.is(':visible')) && (!$('body').hasClass('sidebar-collapse'))) {
           //Close the menu
-        	// alert("222222");
           checkElement.slideUp(animationSpeed, function () {
             checkElement.removeClass('menu-open');
             //Fix the layout in case the sidebar stretches over the height of the window
@@ -440,7 +464,6 @@ function _init() {
         //If the menu is not visible
         else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
           //Get the parent menu
-        	// alert("111111");
           var parent = $this.parents('ul').first();
           //Close all open menus within the parent
           var ul = parent.find('ul:visible').slideUp(animationSpeed);
@@ -458,6 +481,11 @@ function _init() {
             //Fix the layout in case the sidebar stretches over the height of the window
             _this.layout.fix();
           });
+        }else{
+        	 var parent = $this.parents('ul').first();
+        	 parent.find('li.active').removeClass('active');
+        	 var parent_li = $this.parent("li");
+        	 parent_li.addClass('active');
         }
         //if this isn't a link, prevent the page from being redirected
         if (checkElement.is('.treeview-menu')) {

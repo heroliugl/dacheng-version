@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 版本说明Dao接口 -->
+<mapper namespace="com.dacheng.mapper.VersionLogMapper">
+
+	<resultMap id="versionLogResult" type="VersionLog">
+		<result property="versionId" column="version_id"></result>
+		<result property="lang" column="lang"></result>
+		<result property="vlog" column="vlog"></result>
+		<result property="status" column="status"></result>
+		<result property="createTime" column="create_time"></result>
+		<result property="updateTime" column="update_time"></result>
+	</resultMap>
+	
+	<sql id="selectColumn">
+		version_id versionId,lang,vlog,status,create_time createTime,update_time updateTime
+	</sql>
+	
+	<!-- 保存信息 -->
+	<insert id="saveVersionLog" parameterType="VersionLog">
+		insert into dc_version_log (version_id, lang, vlog,status,create_time,update_time) 
+		values (#{versionId}, #{lang}, #{vlog},#{status}, now(), now())
+	</insert>
+	
+	<!-- 根据版本说明ID删除版本说明信息 -->
+	<delete id="deleteVersionLogById">
+		delete from dc_version_log where version_id = #{versionId}
+	</delete>
+	
+		<!-- 根据版本说明ID删除版本说明信息 -->
+	<delete id="deleteVersionLogByIdAndLang">
+		delete from dc_version_log where version_id = #{versionId} and lang = #{lang}
+	</delete>
+	
+	<!-- 根据版本说明ID更新里程 -->
+	<update id="UpdateVersionLog" parameterType="VersionLog">
+		update dc_version_log 
+		<set>
+		    update_time = now()
+			<if test="vlog != null and vlog != '' ">
+				,vlog = #{vlog}
+			</if>
+			<if test="status != null and status != ''  ">
+				,status = #{status}
+			</if>
+		</set>
+		where version_id = #{versionId} and lang = #{lang}
+	</update>
+	
+	<!-- 根据用户ID查询版本说明信息 resultMap="versionlogResult"-->
+    <select id="findVersionLogById" resultType="VersionLog">
+		select * from dc_version_log where version_id = #{versionId} 
+	</select>
+
+	<!-- <select id="findVersionLogById" resultMap="versionlogResult">
+		select * from dc_version_log where version_id = #{versionId} 
+	</select> -->
+	
+	
+	<!-- 根据用户ID查询版本说明信息  <include refid="selectColumn" />-->
+    <select id="findVersionLogByIdAndLang" resultType="VersionLog">
+		select * from dc_version_log where version_id = #{versionId} and lang = #{lang}
+	</select>
+	
+	<!-- <select id="findVersionLogByIdAndLang" resultMap="versionlogResult">
+		select * from dc_version_log where version_id = #{versionId} and lang = #{lang}
+	</select> -->
+	
+	
+	
+</mapper>

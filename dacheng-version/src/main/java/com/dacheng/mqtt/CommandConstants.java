@@ -1,8 +1,8 @@
 package com.dacheng.mqtt;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+/*import java.util.stream.Collectors;
+import java.util.stream.IntStream;*/
 
 /**
  * Created by Kai Wang on 16/8/12.
@@ -115,7 +115,7 @@ public class CommandConstants {
         "","Comunication Failure","Battery Failure","Lamp Failure","","","",""
     };
 
-    public static String getLampStatusString(int sta){
+/*    public static String getLampStatusString(int sta){
         if(sta == 0){
             return "Ok";
         }else {
@@ -125,34 +125,12 @@ public class CommandConstants {
             }).collect(Collectors.joining(""));
 
         }
-    }
+    }*/
 
     public static  final String BROADCAST ="ff:ff:ff:ff:ff:ff";
     
     public static void main(String[] args) {
-    	String result1 = getLampStatusString(2);
-    	System.out.println("result:"+result1);
-    	List<Integer> result= new ArrayList<>();
- /*   	 BitSet bs1= BitSet.valueOf(new byte[]{12});
-         
-         for (int i = 0; i <6 ; i++) {
-             if(bs1.get(i)){
-                 result.add(i);
-             }
-         }*/
-         result =  getLampGroups(0);
 
-         System.out.println(result);
-         
-         List<Integer> list = new ArrayList<Integer>();
-         list.add(2);
-         list.add(3);
-         
-        //  BitSet bs2=new BitSet();
-         // Arrays.asList(2,3).forEach(i -> bs2.set(i,true));
-         
-        // list.forEach(i -> bs2.set(i,true));
-         //System.out.println(getLampGroupValue(list));
 	}
     
     
@@ -171,12 +149,12 @@ public class CommandConstants {
     }
     
     
-    public static Integer getLampGroupValue(List<Integer> list){
+/*    public static Integer getLampGroupValue(List<Integer> list){
     	if(null != list && list.size() >0){
     		BitSet bs2=new BitSet();
             list.forEach(i -> bs2.set(i,true));
             return (int) bs2.toLongArray()[0];
     	}
     	return 0;
-    }
+    }*/
 }

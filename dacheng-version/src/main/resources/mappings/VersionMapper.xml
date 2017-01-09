@@ -35,6 +35,7 @@
 		<result property="forceUpdate" column="force_update" />
 		<result property="url" column="url" />
 		<result property="status" column="status" />
+		<result property="testStatus" column="test_status" />
 		<result property="vflag" column="vflag" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
@@ -82,7 +83,10 @@
 				,url = #{url}
 			</if>
 			<if test="status != null and status != ''  ">
-				,vflag = #{vflag}
+				,status = #{status}
+			</if>
+			<if test="testStatus != null and testStatus != ''  ">
+				,test_status = #{testStatus}
 			</if>
 			<if test="vflag != null and vflag != ''  ">
 				,vflag = #{vflag}
@@ -96,20 +100,25 @@
 		select * from dc_version where id = #{id}
 	</select>
 	
+		<!-- 根据用户ID查询车辆信息 -->
+	<select id="findVersionByVersion" resultMap="versionResult">
+		select * from dc_version where ptype = #{ptype} and vtype = #{vtype} and vm = #{vm} and vflag = #{vflag}
+	</select>
+	
 	<select id="findPage" resultType="java.util.HashMap">
 		<include refid="pre"/>
-		select * from dc_version
+		select * from dc_version order by ptype,vtype,vm
 		<include refid="suf"/>
 	</select>
 	
    <select id="findPageList" resultMap="versionResult">
 		<include refid="pre"/>
-		select * from dc_version
+		select * from dc_version order by ptype,vtype,vm
 		<include refid="suf"/>
 	</select>
 	
    <select id="findList" resultMap="versionResult">
-		select * from dc_version
+		select * from dc_version order by ptype,vtype,vm
 	</select>
 	
 	

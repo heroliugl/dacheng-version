@@ -15,9 +15,9 @@ import com.dacheng.mqtt.MQTTUtils;
  * Created by KaiWang on 16/8/30.
  */
 
-@Configuration
+/*@Configuration
 @ComponentScan
-@PropertySource("classpath:mqtt.properties")
+@PropertySource("classpath:mqtt.properties")*/
 public class MqttApplication {
 
 //    @Bean(destroyMethod = "shutdown")
@@ -26,7 +26,7 @@ public class MqttApplication {
 //        return Redisson.create(config);
 //    }
 
-    @Bean
+ /*   @Bean
     @Scope("singleton")  //actually default is singleton
     public MQTTUtils mqttUtils(MqttCallBackService mqttCallBackService,
                                @Value("#{mqtt['mqtt.host']}") String host,
@@ -40,11 +40,11 @@ public class MqttApplication {
         mqttUtils.setMqttCallBackService(mqttCallBackService);
         mqttUtils.startListener();
         return mqttUtils;
-    }
+    }*/
 
     //You need this
-    @Bean
+/*    @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
-    }
+    }*/
 }

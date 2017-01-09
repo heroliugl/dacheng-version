@@ -78,7 +78,7 @@
           <li class="dropdown messages-menu">
             
             <a href="#" >
-              <span class="hidden-xs"><strong>{{current}}</strong></span>
+              <span class="hidden-xs" style="font-size: 14px;"><strong>{{current}}</strong></span>
             </a> 
           </li>
           <li class="dropdown messages-menu">
@@ -277,13 +277,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="dist/img/user1-160x160.jpg" class="user-image" alt="User Image">
               <span class="hidden-xs">Admin</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="dist/img/user1-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
                   Admin - Web Administrator
@@ -292,7 +292,7 @@
               </li>
               <!-- Menu Body -->
               <li class="user-body">
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
                   </div>
@@ -302,16 +302,16 @@
                   <div class="col-xs-4 text-center">
                     <a href="#">Friends</a>
                   </div>
-                </div>
+                </div> -->
                 <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">设置</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="#" class="btn btn-default btn-flat" ng-click="toLogin()">退出</a>
                 </div>
               </li>
             </ul>
@@ -331,11 +331,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="dist/img/user1-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>Administrator</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <!-- <a href="#">--><i class="fa fa-circle text-success"></i> <!-- Online</a> -->
         </div>
       </div>
       <!-- search form -->
@@ -387,7 +387,7 @@
             <li><a href="/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> 其他</a></li>
           </ul>
         </li> -->
-        <li class="treeview">
+<!--         <li class="treeview">
 	          <a href="#">
 	            <i class="fa fa-pie-chart"></i>
 	            <span>统计</span>
@@ -396,14 +396,14 @@
 	            </span>
 	          </a>
 	          <ul class="treeview-menu">
-	            <li><a href="javascript:listIgoal('/pages/charts/chartjs1.html');"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-	            <li><a href="javascript:listIgoal('/pages/charts/morris.html');"><i class="fa fa-circle-o"></i> Morris</a></li>
-	            <li><a href="javascript:listIgoal('/pages/charts/flot.html');"><i class="fa fa-circle-o"></i> Flot</a></li>
-	            <li><a href="javascript:listIgoal('/pages/charts/inline.html');"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+	            <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+	            <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i> Morris</a></li>
+	            <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i> Flot</a></li>
+	            <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i> Inline charts</a></li>
 	          </ul>
-	    </li>
+	    </li> -->
         <li>
-          <a href="javascript:listIgoal('/pages/calendar.html');">
+          <a href="#/help">
             <i class="fa fa-th"></i> <span>帮助</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
@@ -459,31 +459,31 @@
     reserved.
   </footer>
 
-  <!-- Control Sidebar -->
-<!--   <aside class="control-sidebar control-sidebar-dark">
-    Create the tabs
+   <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
       <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+      <!-- <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li> -->
     </ul>
-    Tab panes
+    <!-- Tab panes -->
     <div class="tab-content">
-      Home tab content
+      <!-- Home tab content -->
       <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <h3 class="control-sidebar-heading">最新动态</h3>
         <ul class="control-sidebar-menu">
           <li>
             <a href="javascript:void(0)">
               <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
               <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                <h4 class="control-sidebar-subheading">2017年国庆中秋一起过</h4>
 
-                <p>Will be 23 on April 24th</p>
+                <p>2017年的国庆中秋重合了，大家有没有发现！</p>
               </div>
             </a>
           </li>
-          <li>
+<!--           <li>
             <a href="javascript:void(0)">
               <i class="menu-icon fa fa-user bg-yellow"></i>
 
@@ -515,12 +515,12 @@
                 <p>Execution time 5 seconds</p>
               </div>
             </a>
-          </li>
+          </li> -->
         </ul>
-        /.control-sidebar-menu
+        <!-- /.control-sidebar-menu -->
 
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
+       <!--  <h3 class="control-sidebar-heading">Tasks Progress</h3> -->
+  <!--       <ul class="control-sidebar-menu">
           <li>
             <a href="javascript:void(0)">
               <h4 class="control-sidebar-subheading">
@@ -569,16 +569,16 @@
               </div>
             </a>
           </li>
-        </ul>
-        /.control-sidebar-menu
+        </ul> -->
+        <!-- /.control-sidebar-menu -->
 
       </div>
-      /.tab-pane
-      Stats tab content
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
       <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      /.tab-pane
-      Settings tab content
-      <div class="tab-pane" id="control-sidebar-settings-tab">
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <!-- div class="tab-pane" id="control-sidebar-settings-tab">
         <form method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
 
@@ -601,7 +601,7 @@
             </label>
 
             <p>
-               Other sets of options are available
+              Other sets of options are available
             </p>
           </div>
           /.form-group
@@ -644,10 +644,11 @@
           </div>
           /.form-group
         </form>
-      </div>
-      /.tab-pane
+      </div> -->
+      <!-- /.tab-pane -->
     </div>
-  </aside> -->
+  </aside>
+  <!-- /.control-sidebar -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
@@ -700,9 +701,9 @@
 <!-- angularJs -->
 <script src="plugins/angularjs/angular.min.js"></script>
 <script src="plugins/angularjs/angular-ui-router.js"></script>
-<script src="plugins/angular-file-upload/angular-file-upload.js"></script>
-<script src="plugins/angular-file-upload/es5-shim.min.js"></script>
-<script src="plugins/angular-file-upload/es5-sham.min.js"></script>
+<!-- <script src="plugins/angular-file-upload/angular-file-upload.js"></script> -->
+<!-- <script src="plugins/angular-file-upload/es5-shim.min.js"></script>
+<script src="plugins/angular-file-upload/es5-sham.min.js"></script> -->
 <script src="plugins/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="plugins/ng-file-upload/ng-file-upload-shim.min.js"></script>
 <script src="dist/js/tm.pagination.js"></script>

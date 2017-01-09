@@ -10,12 +10,12 @@ import com.dacheng.mqtt.entity.Message;
 /**
  * Created by Kai Wang on 16/8/12.
  */
-@Service
+/*@Service*/
 public class CommandService {
     org.slf4j.Logger logger = LoggerFactory.getLogger(CommandService.class);
 
 
-    @Autowired
+   /* @Autowired*/
     private MQTTUtils mqttUtils;
 
     public void handler(Message msg) {

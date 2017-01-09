@@ -24,6 +24,7 @@
 
 .page-list .pagination span {
 	cursor: pointer;
+	padding: 10px 15px;
 }
 
 .page-list .pagination .separate span {
@@ -42,7 +43,7 @@
 }
 
 .page-list .page-total input, .page-list .page-total select {
-	height: 26px;
+	height: 32px;
 	border: 1px solid #ddd;
 }
 

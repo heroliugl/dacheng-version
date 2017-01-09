@@ -52,54 +52,81 @@
 	        
 	        $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', $scope.doQuery);
 	      // $scope.doQuery();
+	        
+	        // 显示版本测试通过确认框
+	     	$scope.showPass = function(id,obj) {
+		    	 console.log(JSON.stringify(obj));
+		    	 $scope.passVersion=obj;
+		   		 $scope.test_version_id = id
+		   	     $("#passModal").modal();
+	        };
+	        
+	        // 版本测试通过
+	        $scope.doPass = function() {
+		   		$.post(path + "/version/testPass/"+$scope.test_version_id).success(
+		 				   function (response) {
+		 					  if(response.code == '200') {
+		 						 $scope.doQuery();
+		 						 $("#passModal").modal('hide');
+		 					  }else{
+		 						  $("#passModal").modal('hide');
+		 						  $scope.showDialog("Warning",source[response.codemsg]);
+		 					  }
+		 			 });
+	        };
+	        
+	        // 显示版本发布确认框
+	     	$scope.showIssue = function(id,obj) {
+		    	 console.log(JSON.stringify(obj));
+		    	 $scope.issueVersion=obj;
+		   		 $scope.issue_version_id = id
+		   	     $("#issueModal").modal();
+	        };
+	        
+	        // 版本发布
+	        $scope.doIssue = function() {
+		 		$.post(path + "/version/issue/"+$scope.issue_version_id).success(
+		 				   function (response) {
+		 					  if(response.code == '200') {
+		 						 $scope.doQuery();
+		 						 $("#issueModal").modal('hide');
+		 					  }else{
+		 						  $("#issueModal").modal('hide');
+		 						  $scope.showDialog("Warning",source[response.codemsg]);
+		 					  }
+		 			 });
+	        };
+	        
+	        // 显示删除确认框
+	    	$scope.showDel = function(id,obj) {
+	    		console.log(JSON.stringify(obj));
+		    	 $scope.delVersion=obj;
+		   		 $scope.del_version_id = id
+		   	     $("#delModal").modal();
+	        };
+	        
+	        // 版本删除
+	    	$scope.doDel = function() {
+	    		$.post(path + "/version/delete/"+$scope.del_version_id).success(
+	 				   function (response) {
+	 					  if(response.code == '200') {
+	 						 $scope.doQuery();
+	 						 $("#delModal").modal('hide');
+	 					  }else{
+	 						  $("#delModal").modal('hide');
+	 						  $scope.showDialog("Warning",source[response.codemsg]);
+	 					  }
+	 			 });
+	        };
+	        
+	        // 提示框
+	        $scope.showDialog = function(title,content) {
+	        	$scope.dialogTitle = title;
+	        	$scope.dialogContent = content;
+	        	$("#dialogModal").modal();
+	        };
+	        
+	        
+	        
 	   });  
-  
-
- /* console.log("12321321");*/
-  /*var app = angular.module('myApp', []);
-  console.log(JSON.stringify(App));
- 
-	  'tm.pagination'
-	  console.log("5555555555555555555555555555555555");
-	  
-	  app.controller('versionsCtrl', function($scope) {
-			  alert("123456");
-		      console.log("11111111111111111111111111111111111111");
-		
-			  $scope.currentPage = 0;
-			  $scope.pageCount = 0;
-			  $scope.source = source;
-			  // $timeout(function(){},500);
-
-		  	  $scope.doQuery = function() {
-			  		
-		  		 $.post(path + "/version/list",
-		  	  	   {
-		  			  currentPage: $scope.paginationConf.currentPage,
-	                 pageSize : $scope.paginationConf.itemsPerPage
-		  	  	    }).success(
-		  	  	       function (response) {
-		  	  	    	  //  Framework.Admin.detectLoginStatus(response);
-		  	  	    	   $scope.versions = response.page.records;
-	 	  	               $scope.paginationConf.totalItems = response.page.rowCount;
-		  	  	    	   $scope.$apply();
-		  	  	    	   // $timeout(function(){$scope.doUserPermissionQuery();},1);
-		  	  	    }).error(function(data, status, headers, config) {
-		  	  	          //  Framework.Admin.detectLoginStatus(JSON.parse(data.responseText).errorCode);
-		  	      	});
-		  	   };
-
-		     // 配置分页基本参数
-		     $scope.paginationConf = {
-		         currentPage: 1,
-		         itemsPerPage: 50
-		     };
-		     
-	       $scope.$watch('paginationConf.currentPage + paginationConf.itemsPerPage', $scope.doQuery);
-		   // $scope.doQuery();
-	 
-		}); 
-	  */
-	 //  console.log(JSON.stringify(App));
-
  
