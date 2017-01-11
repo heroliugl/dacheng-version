@@ -3,6 +3,7 @@ package com.dacheng.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +17,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dacheng.entity.User;
+import com.dacheng.service.UserService;
 import com.dacheng.utils.MD5;
 import com.dacheng.utils.ServiceConfig;
 
 @Controller
 @RequestMapping(value = "/")
 public class LoginController extends BaseController{
+	
+	
+	@Autowired
+	private UserService userService;
 
 	private static String adminPwd=ServiceConfig.getInstance().getValue("admin_pwd");
 	
@@ -88,9 +95,15 @@ public class LoginController extends BaseController{
     public Map<String, Object> doLogin(HttpServletRequest request, String loginName,String password) {
 		Map<String, Object> map = new HashMap<String, Object>();
     	if(StringUtils.isNotBlank(loginName) && StringUtils.isNotBlank(password)){
-    		if(loginName.equals("admin") && MD5.Md5(password).equalsIgnoreCase(adminPwd)){
-    			User user = new User();
-    			user.setLoginname(loginName);
+    		User user =new User();
+			try {
+				user = userService.findUserByLoginNameAndPassword(loginName, MD5.Md5(password));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		if(null != user && null != user.getId()){
+    			user.setPassword(null);
     			request.getSession().setAttribute("user", user);
     			map.put("code", 200);
       			map.put("codemsg", "请求成功");

@@ -1,17 +1,17 @@
 package com.dacheng.entity;
 
 public class Role {
-	private Integer roleId;    // 角色编号
+	private Long roleId;    // 角色编号
 	private String roleName;   // 角色名称
 	private String roleKey;    // 角色标识
 	private String createTime; // 创建时间
 	private String description;// 角色介绍
 	private String status;     // 角色状态  1：生效  0：失效
 	
-	public Integer getRoleId() {
+	public Long getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 	public String getRoleName() {

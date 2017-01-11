@@ -59,6 +59,26 @@ App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $
         url: '/version/add',
         templateUrl: path+ '/version/add', 
         controller: 'versionsAddCtrl'
+    }).state('product/list', {
+        url: '/product/list',
+        templateUrl: path+ '/product/list', 
+        controller: 'productsCtrl'
+    }).state('author/list', {
+        url: '/author/list',
+        templateUrl: path+ '/author/list', 
+        controller: 'imeiAuthorsCtrl'
+    }).state('author/applyList', {
+        url: '/author/applyList',
+        templateUrl: path+ '/author/applyList', 
+        controller: 'imeiApplysCtrl'
+    }).state('user/list', {
+        url: '/user/list',
+        templateUrl: path+ '/user/list', 
+        controller: 'usersCtrl'
+    }).state('role/list', {
+        url: '/role/list',
+        templateUrl: path+ '/role/list', 
+        controller: 'rolesCtrl'
     }).state('help', {
         url: '/help',
         templateUrl: path+ '/pages/help.html' 

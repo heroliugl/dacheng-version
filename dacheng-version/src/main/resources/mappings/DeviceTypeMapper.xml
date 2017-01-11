@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 产品Dao接口实现类 -->
+
+<!-- 产品Dao接口 -->
+<mapper namespace="com.dacheng.mapper.DeviceTypeMapper">
+
+	<!-- 保存产品信息 -->
+	<insert id="saveDeviceType" parameterType="DeviceType">
+		insert into dc_device_type (type_name, type_code, status,create_time) 
+		values (#{typeName}, #{typeCode},#{status}, now())
+		<selectKey resultType="long" keyProperty="typeId" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 根据ID删除产品信息 -->
+	<delete id="deleteDeviceTypeById">
+		delete from dc_device_type where type_id = #{typeId}
+	</delete>
+	
+	<!-- 根据产品ID更新里程 -->
+	<update id="updateDeviceType" parameterType="DeviceType">
+		update dc_device_type 
+		<set>
+		    update_time = now()
+			<if test="typeName != null and typeName != '' ">
+				,type_name = #{typeName}
+			</if>
+			<if test="status != null and status != '' ">
+				,status = #{status}
+			</if>
+		</set>
+		where type_id = #{typeId}
+	</update>
+	
+	<!-- 根据产品ID查询产品信息 -->
+	<select id="findDeviceTypeById" resultType="DeviceType">
+		select * from dc_device_type where type_id = #{typeId}
+	</select>
+	
+	<!-- 根据产品key查询产品信息 -->
+	<select id="findDeviceTypeByTypeCode" resultType="DeviceType">
+		select * from dc_device_type where type_code = #{typeCode}
+	</select>
+	
+	<!-- 根据产品名称检查产品名称是否存在 -->
+	<select id="checkDeviceTypeNameIsExist" resultType="int">
+		select count(*) from dc_device_type where type_name = #{typeName}
+	</select>
+	
+	<!-- 根据查询产品列表 -->
+	<select id="findDeviceTypeList" resultType="DeviceType">
+		select * from dc_device_type 
+		where 1 = 1
+		<if test="status != null and status != '' ">
+           and status = #{status}
+        </if>
+        <if test="typeName != null and typeName != '' ">
+           and type_name = #{typeName}
+        </if>
+	</select>
+	
+</mapper>

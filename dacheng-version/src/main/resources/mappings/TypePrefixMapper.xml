@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 产品Dao接口实现类 -->
+
+<!-- 产品Dao接口 -->
+<mapper namespace="com.dacheng.mapper.TypePrefixMapper">
+
+	<!-- 保存产品信息 -->
+	<insert id="saveTypePrefix" parameterType="TypePrefix">
+		insert into dc_type_prefix (type_id, type_prefix, status,create_time) 
+		values (#{typeId}, #{typePrefix},#{status}, now())
+	</insert>
+	
+	<!-- 根据ID删除产品信息 -->
+	<delete id="deleteTypePrefixByTypeId">
+		delete from dc_type_prefix where type_id = #{typeId}
+	</delete>
+	
+	<!-- 根据ID删除产品信息 -->
+	<delete id="deleteTypePrefixByTypeIdAndPrefix">
+		delete from dc_type_prefix where type_id = #{typeId} and type_prefix = #{typePrefix}
+	</delete>
+	
+	<!-- 根据产品ID更新里程 -->
+	<update id="updateTypePrefix" parameterType="TypePrefix">
+		update dc_type_prefix 
+		<set>
+		    update_time = now()
+			<if test="typePrefix != null and typePrefix != '' ">
+				,type_prefix = #{typePrefix}
+			</if>
+			<if test="status != null and status != '' ">
+				,status = #{status}
+			</if>
+		</set>
+		where type_id = #{typeId}
+	</update>
+	
+	<!-- 根据产品ID查询产品信息 -->
+	<select id="findTypePrefixByTypeIdAndPrefix" resultType="TypePrefix">
+		select * from dc_type_prefix where type_id = #{typeId} and type_prefix = #{typePrefix}
+	</select>
+	
+	<!-- 根据产品ID查询产品信息 -->
+	<select id="findTypePrefixByPrefix" resultType="TypePrefix">
+		select * from dc_type_prefix where type_prefix = #{typePrefix}
+	</select>
+
+	<!-- 根据产品名称检查产品名称是否存在 -->
+	<select id="checkTypePrefixIsExist" resultType="int">
+		select count(*) from dc_type_prefix where type_prefix = #{typePrefix}
+	</select>
+	
+	<!-- 根据查询产品列表 -->
+	<select id="findTypePrefixList" resultType="TypePrefix">
+		select * from dc_type_prefix 
+		where 1 = 1
+		<if test="status != null and status != '' ">
+           and status = #{status}
+        </if>
+        <if test="typePrefix != null and typePrefix != '' ">
+           and type_prefix = #{typePrefix}
+        </if>
+	</select>
+	
+</mapper>

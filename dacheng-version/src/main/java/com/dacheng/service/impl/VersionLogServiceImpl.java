@@ -52,9 +52,9 @@ public class VersionLogServiceImpl implements VersionLogService {
 	}
 
 	@Override
-	public int UpdateVersionLog(VersionLog versionLog) throws Exception {
+	public int updateVersionLog(VersionLog versionLog) throws Exception {
 		// TODO Auto-generated method stub
-		return this.versionLogMapper.UpdateVersionLog(versionLog);
+		return this.versionLogMapper.updateVersionLog(versionLog);
 	}
 
 }

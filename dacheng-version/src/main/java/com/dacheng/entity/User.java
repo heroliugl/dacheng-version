@@ -1,41 +1,34 @@
 package com.dacheng.entity;
 
+import java.util.Date;
+
 public class User {
-	private int userid;
-	private String loginname;
-	private String nickname;
-	private String email;
-	private String password;
-	private String headurl;
-	private int sex;
-	private String createtime;
-	private String fuelprice;
-	private int status;
-	private int isRegisterUser;
-	
-	public int getUserid() {
-		return userid;
+	private Long id;           // 主键ID
+	private String userName;   // 用户名
+	private String fullName;   // 
+	private String password;   // 登陆密码
+	private String headImgUrl; // 头像
+	private String email;      // 邮箱
+	private String status;     // 用户状态
+	private Date createTime;   // 创建时间
+	private Date updateTime;   // 更新时间
+	public Long getId() {
+		return id;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public String getLoginname() {
-		return loginname;
+	public String getUserName() {
+		return userName;
 	}
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getFullName() {
+		return fullName;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 	public String getPassword() {
 		return password;
@@ -43,40 +36,40 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getHeadurl() {
-		return headurl;
+	public String getHeadImgUrl() {
+		return headImgUrl;
 	}
-	public void setHeadurl(String headurl) {
-		this.headurl = headurl;
+	public void setHeadImgUrl(String headImgUrl) {
+		this.headImgUrl = headImgUrl;
 	}
-	public int getSex() {
-		return sex;
+	public String getEmail() {
+		return email;
 	}
-	public void setSex(int sex) {
-		this.sex = sex;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getCreatetime() {
-		return createtime;
-	}
-	public void setCreatetime(String createtime) {
-		this.createtime = createtime;
-	}
-	public String getFuelprice() {
-		return fuelprice;
-	}
-	public void setFuelprice(String fuelprice) {
-		this.fuelprice = fuelprice;
-	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getIsRegisterUser() {
-		return isRegisterUser;
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setIsRegisterUser(int isRegisterUser) {
-		this.isRegisterUser = isRegisterUser;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", fullName=" + fullName + ", password=" + password
+				+ ", headImgUrl=" + headImgUrl + ", email=" + email + ", status=" + status + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + "]";
 	}
 }

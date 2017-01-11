@@ -18,6 +18,7 @@
 <!-- <link rel="stylesheet" href="ionicons/css/ionicons.min.css"> -->
 <!-- Theme style -->
 <link rel="stylesheet" href="dist/css/AdminLTE.css">
+
 <!-- iCheck -->
 <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 </head>
@@ -29,17 +30,20 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">
-       <img alt="" src="">
+       <img alt="" src="dist/img/user1-160x160.jpg" style="height: 60px;width: 85px;">
     </p>
-
     <form action="index.jsp" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Login Name" ng-model="loginName">
+        <input type="text" class="form-control" ng-class="{true: 'error'}[login_name]" placeholder="LoginName" ng-model="loginName"
+            ng-change="loginNameChange()">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <span class="error" ng-show="login_name">请输入登陆名</span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" ng-model="password" >
+        <input type="password" class="form-control" ng-class="{true: 'error'}[pass_word]" placeholder="Password" ng-model="password"
+           ng-change="passwordChange()" >
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <span class="error" ng-show="pass_word">请输入登陆密码</span>
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -90,10 +94,11 @@
 <script src="plugins/angularjs/angular.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-
 <script src="dist/js/login.js"></script>
 <!-- iCheck -->
 <script src="plugins/iCheck/icheck.min.js"></script>
+
+
 <script>
 
 var path = "<%=path%>";

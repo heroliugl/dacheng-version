@@ -43,7 +43,7 @@ public interface VersionLogService {
 	 * 根据版本说明ID查询版本说明信息
 	 * @return 版本说明信息
 	 */
-	public int UpdateVersionLog(VersionLog versionLog) throws Exception;
+	public int updateVersionLog(VersionLog versionLog) throws Exception;
 	
 	/**
 	 * 根据版本说明ID查询版本说明信息

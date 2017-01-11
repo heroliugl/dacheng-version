@@ -347,7 +347,7 @@ public class MD5
     return sb.toString();
   }
   
-  //十六位的md5加密
+  //32位的md5加密
   public static String Md5(String plainText ) { 
 	  StringBuffer buf = new StringBuffer(""); 
 	  try { 
@@ -367,6 +367,28 @@ public class MD5
 		  e.printStackTrace(); 
 	  }
 	  return buf.toString();
+  }
+  
+  //十六位的md5加密
+  public static String Md516(String plainText ) { 
+	  StringBuffer buf = new StringBuffer(""); 
+	  try { 
+		  MessageDigest md = MessageDigest.getInstance("MD5"); 
+		  md.update(plainText.getBytes()); 
+		  byte b[] = md.digest(); 
+		  int i; 
+		  for (int offset = 0; offset < b.length; offset++) { 
+		  i = b[offset]; 
+		  if(i<0) i+= 256; 
+		  if(i<16) 
+		  buf.append("0"); 
+		  buf.append(Integer.toHexString(i)); 
+		  } 
+		  System.out.println("result16: " + buf.toString().substring(8,24));//32位的加密 
+	  } catch (NoSuchAlgorithmException e) { 
+		  e.printStackTrace(); 
+	  }
+	  return buf.toString().substring(8,24);
   }
   
 //  public static String Md5(String inStr){  

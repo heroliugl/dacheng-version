@@ -57,7 +57,7 @@
 	</delete>
 	
 	<!-- 根据车辆ID更新里程 -->
-	<update id="UpdateVersion" parameterType="Version">
+	<update id="updateVersion" parameterType="Version">
 		update dc_version 
 		<set>
 		    update_time = now()

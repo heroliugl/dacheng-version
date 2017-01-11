@@ -37,7 +37,7 @@ public interface VersionService {
 	 * 根据版本ID查询版本信息
 	 * @return 版本信息
 	 */
-	public int UpdateVersion(Version version) throws Exception;
+	public int updateVersion(Version version) throws Exception;
 	
 	/**
 	 * 根据版本ID查询版本信息

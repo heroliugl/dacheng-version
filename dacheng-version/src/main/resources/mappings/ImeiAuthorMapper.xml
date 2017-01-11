@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 授权IMEIDao接口实现类 -->
+
+<!-- 授权IMEIDao接口 -->
+<mapper namespace="com.dacheng.mapper.ImeiAuthorMapper">
+
+	<!-- 保存授权IMEI信息 -->
+	<insert id="saveImeiAuthor" parameterType="ImeiAuthor">
+		insert into dc_imei_author (imei, status,create_time) 
+		values (#{imei},#{status}, now())
+	</insert>
+	
+	<!-- 根据ID删除授权IMEI信息 -->
+	<delete id="deleteImeiAuthorByImei">
+		delete from dc_imei_author where imei = #{imei}
+	</delete>
+	
+	<!-- 根据授权IMEIID更新里程 -->
+	<update id="updateImeiAuthor" parameterType="ImeiAuthor">
+		update dc_imei_author 
+		<set>
+		    update_time = now()
+			<if test="status != null and status != '' ">
+				,status = #{status}
+			</if>
+		</set>
+		where imei = #{imei}
+	</update>
+	
+	<!-- 根据授权IMEIID查询授权IMEI信息 -->
+	<select id="findImeiAuthorByImei" resultType="ImeiAuthor">
+		select * from dc_imei_author where imei = #{imei}
+	</select>
+	
+	<!-- 根据查询授权IMEI列表 -->
+	<select id="findImeiAuthorList" resultType="ImeiAuthor">
+		select * from dc_imei_author 
+		where 1 = 1
+		<if test="status != null and status != '' ">
+           and status = #{status}
+        </if>
+        <if test="imei != null and imei != '' ">
+           and imei = #{imei}
+        </if>
+	</select>
+	
+</mapper>

@@ -157,7 +157,7 @@ public class VersionController extends BaseController{
          								version.setUrl(url);
          								version.setVname(_vname);
              							version.setForceUpdate(forceUpdate.equals("1")?true:false);
-             							versionService.UpdateVersion(version);
+             							versionService.updateVersion(version);
              							// 版本声明处理
              							saveVersionLog(version.getId(),cnlog,enlog);
              							map.put("code", 200);
@@ -266,6 +266,7 @@ public class VersionController extends BaseController{
      * @throws Exception
      */
     public void saveVersionLog(Long versionId,String cnlog,String enlog) throws Exception{
+    	System.out.println("cnlog == "+cnlog+ " ,enlog == "+enlog);
     	if(null != versionId){
     		// 查询中文声明
     		VersionLog cnLog = versionLogService.findVersionLogByIdAndLang(versionId, "cn");
@@ -273,7 +274,7 @@ public class VersionController extends BaseController{
     			if(StringUtils.isNotBlank(cnlog)){
     				// 更新
     				cnLog.setVlog(cnlog);
-    				versionLogService.UpdateVersionLog(cnLog);
+    				versionLogService.updateVersionLog(cnLog);
     			}else{
     				versionLogService.deleteVersionLogByIdAndLang(versionId, "cn");
     			}
@@ -291,7 +292,7 @@ public class VersionController extends BaseController{
     			if(StringUtils.isNotBlank(enlog)){
     				// 更新
     				enLog.setVlog(enlog);
-    				versionLogService.UpdateVersionLog(enLog);
+    				versionLogService.updateVersionLog(enLog);
     			}else{
     				versionLogService.deleteVersionLogByIdAndLang(versionId, "en");
     			}
@@ -382,7 +383,7 @@ public class VersionController extends BaseController{
                 			Version issue = new Version();
                     		issue.setStatus("1");
                     		issue.setId(versionId);
-                    		versionService.UpdateVersion(issue);
+                    		versionService.updateVersion(issue);
                     		map.put("code", 200);
         					map.put("codemsg", "版本发布成功");
                 		}else{
@@ -424,7 +425,7 @@ public class VersionController extends BaseController{
                 			Version issue = new Version();
                     		issue.setTestStatus("1");
                     		issue.setId(versionId);
-                    		versionService.UpdateVersion(issue);
+                    		versionService.updateVersion(issue);
                     		map.put("code", 200);
         					map.put("codemsg", "版本测试状态修改成功");
                 		}else{

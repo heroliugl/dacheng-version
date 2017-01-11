@@ -49,10 +49,10 @@ public class VersionServiceImpl implements VersionService {
 	}
 	
 	@Override
-	public int UpdateVersion(Version version) throws Exception {
+	public int updateVersion(Version version) throws Exception {
 		// TODO Auto-generated method stub
 		
-		int rowNum = this.versionMapper.UpdateVersion(version);
+		int rowNum = this.versionMapper.updateVersion(version);
 		return rowNum;
 	}
 

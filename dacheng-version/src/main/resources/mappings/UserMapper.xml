@@ -5,88 +5,46 @@
 
 <!-- 用户Dao接口 -->
 <mapper namespace="com.dacheng.mapper.UserMapper">
-	<!-- 查询所有用户信息 -->
-<!-- 	<select id="queryUsers" resultType="User">
-		select * from users
+
+
+	<sql id="userColumn">
+		id,username userName,fullname fullName,password
+		,head_img_url headImgUrl,email,status,createtime createTime,update_time updateTime
+	</sql>
+    
+    <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">  
+	    insert into t_user(username, fullname, email, password, head_img_url, createtime, status)  
+	    values(#{userName}, #{fullName}, #{email}, #{password}, #{headImgUrl}, now(),#{status})  
+	</insert> 
+	
+	
+	<select id="findUserByLoginNameAndPassword" resultType="User">
+		select <include refid="userColumn" /> from t_user where username = #{loginName} and password = #{password}
+	</select> 
+	
+	
+	<select id="findUserById" resultType="User">
+		select <include refid="userColumn" /> from t_user where id = #{id}
+	</select> 
+	
+	<select id="findUserByLoginName" resultType="User">
+		select <include refid="userColumn" /> from t_user where username = #{loginName}
 	</select>
 	
-	保存用户信息
-	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userid">  
-	    insert into users(userid, loginname, nickname, email, password, sex, createtime, status,isRegisterUser)  
-	    values(#{userid}, #{loginname}, #{nickname}, #{email}, #{password}, #{sex}, now(), 1, #{isRegisterUser})  
-	</insert>  
-	
-	根据登录名和密码查询用户
-	<select id="queryUserByLoginnameAndPassword" resultType="User">
-		select * from users where loginname = #{loginname} and password = #{password}
+	 <select id="findUserList" resultType="User">
+		select <include refid="userColumn" /> from t_user
+		where 1 = 1
+		<if test="status != null and status != '' ">
+           and status = #{status}
+        </if>
+        <if test="userName != null and userName != '' ">
+           and username = #{userName}
+        </if>
+        <if test="email != null and email != '' ">
+           and email = #{email}
+        </if>
+        
+        order by id
 	</select>
-	
-	根据登录名查询用户
-	<select id="queryUserByLoginname" resultType="User">
-		select * from users where loginname = #{loginname}
-	</select>
-	
-	根据用户ID更新用户头像地址
-	<update id="updateUserHeadurlByUserid">
-		update users 
-		<set>
-			headurl = #{headurl} 
-		</set>
-		where userid = #{userid}
-		<selectKey resultType="int" keyProperty="userid"  order="AFTER">
-			select LAST_INSERT_ID()
-		</selectKey>
-	</update>
-		
-	根据用户ID查询用户
-	<select id="queryUserByUserid" resultType="User">
-		select * from users where userid = #{userid}
-	</select>
-	
-	根据用户ID更新油价
-	<update id="updateFuelpriceByUserid">
-		update users 
-		<set>
-			fuelprice = #{fuelprice} 
-		</set>
-		where loginname = #{loginname}
-		<selectKey resultType="int" keyProperty="userid"  order="AFTER">
-			select LAST_INSERT_ID()
-		</selectKey>
-	</update>
-	
-	根据用户登录名更新密码
-	<update id="updatePasswordByLoginname">
-		update users 
-		<set>
-			password = #{newpassword} 
-		</set>
-		where loginname = #{loginname}
-		<selectKey resultType="int" keyProperty="userid"  order="AFTER">
-			select LAST_INSERT_ID()
-		</selectKey>
-	</update>
-	<update id="updateImeiUserToRegisterUser" parameterType="User" >
-	    update users 
-	    set
-	        loginname=#{loginname},
-	        nickname=#{nickname},
-	        email=#{email},
-	        password=#{password},
-	        sex=#{sex},
-	        isRegisterUser=#{isRegisterUser}
-	    where userid=#{userid}
-	</update>
-	
-	根据用户名更新邮箱地址
-	<update id="updateEmailByLoginname">
-		update users
-		<set>
-			email = #{email}
-		</set>
-		where loginname=#{loginname}
-		<selectKey resultType="int" keyProperty="userid"  order="AFTER">
-			select LAST_INSERT_ID()
-		</selectKey>
-	</update> -->
+
 </mapper>

@@ -35,7 +35,7 @@
 	</delete>
 	
 	<!-- 根据版本说明ID更新里程 -->
-	<update id="UpdateVersionLog" parameterType="VersionLog">
+	<update id="updateVersionLog" parameterType="VersionLog">
 		update dc_version_log 
 		<set>
 		    update_time = now()

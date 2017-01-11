@@ -45,7 +45,7 @@ public interface VersionLogMapper {
 	 * 根据版本说明对象更新版本说明信息（版本ID,lang）
 	 * @return 受影响行数
 	 */
-	public int UpdateVersionLog(VersionLog versionLog) throws Exception;
+	public int updateVersionLog(VersionLog versionLog) throws Exception;
 	
 	/**
 	 * 查询版本说明信息(分页)

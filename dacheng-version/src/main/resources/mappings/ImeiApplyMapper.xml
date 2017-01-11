@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 授权IMEIDao接口实现类 -->
+
+<!-- 授权IMEIDao接口 -->
+<mapper namespace="com.dacheng.mapper.ImeiApplyMapper">
+
+	<!-- 根据ID删除授权IMEI信息 -->
+	<delete id="deleteImeiApplyByImei">
+		delete from dc_imei_apply where imei = #{imei}
+	</delete>
+	
+	<!-- 根据ID删除授权IMEI信息 -->
+	<delete id="deleteImeiApplyByApplyId">
+		delete from dc_imei_apply where apply_id = #{applyId}
+	</delete>
+	
+	<!-- 根据授权IMEIID查询授权IMEI信息 -->
+	<select id="findImeiApplyByApplyId" resultType="ImeiApply">
+		select * from dc_imei_apply where apply_id = #{applyId}
+	</select>
+	
+	<!-- 根据查询授权IMEI列表 -->
+	<select id="findImeiApplyList" resultType="ImeiApply">
+		select * from dc_imei_apply 
+		where 1 = 1
+		<if test="applyType != null and applyType != '' ">
+           and apply_type = #{applyType}
+        </if>
+        <if test="imei != null and imei != '' ">
+           and imei = #{imei}
+        </if>
+        <if test="applyName != null and applyName != '' ">
+           and applyName = #{applyName}
+        </if>
+	</select>
+	
+</mapper>

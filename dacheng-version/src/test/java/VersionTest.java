@@ -75,7 +75,7 @@ public class VersionTest {
     	   version.setUrl("Battery_Monitor_BM2_20161103_V0002_A.bin");
     	   version.setStatus("0");
     	   version.setVflag("A");
-    	   int n = versionService.UpdateVersion(version);
+    	   int n = versionService.updateVersion(version);
     	   System.out.println(n);
     	   System.out.println(version.toString());
 		} catch (Exception e) {

@@ -37,7 +37,7 @@ public interface VersionMapper {
 	 * 根据行程ID查询行程信息
 	 * @return 行程信息
 	 */
-	public int UpdateVersion(Version version) throws Exception;
+	public int updateVersion(Version version) throws Exception;
 	
 	/**
 	 * 根据行程ID查询行程信息

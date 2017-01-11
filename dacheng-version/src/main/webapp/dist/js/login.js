@@ -8,7 +8,7 @@
 	  /* $timeout(function(){
 		   $scope.source = source;
 	   },500);*/
-	   
+	   // 
 	   var _loginName = getCookie("loginName");
 	   // alert("userName:"+userName);
 	   if(_loginName.length > 0){
@@ -39,9 +39,17 @@
 		   $scope.loginform.password.$dirty = true;*/
 		   var loginName = $scope.loginName;
 		   var password = $scope.password;
-		   console.log("loginName "+loginName+"password "+password);
+		   if(!loginName || loginName.length == 0){
+			   $scope.login_name=true;
+		   }
+		   if(!password ||password.length == 0){
+			   $scope.pass_word=true;
+		   }
 		   
 		   if(loginName.length > 0 && password.length > 0){
+			   $scope.login_name =false;
+			   $scope.pass_word=false;
+			   console.log("loginName "+loginName+"password "+password);
 			   var param = {
         			   loginName: loginName,
         			   password: password,
@@ -64,6 +72,25 @@
 		   }
 	   }
 	   
+	   
+	   $scope.loginNameChange = function() {
+		   var loginName = $scope.loginName;
+		   if(loginName && loginName.length > 0){
+			   $scope.login_name=false;
+		   }else{
+			   $scope.login_name=true;
+		   }
+      };
+      
+      $scope.passwordChange = function() {
+    	  var password = $scope.password;
+		   if(password && password.length > 0){
+			   $scope.pass_word=false;
+		   }else{
+			   $scope.pass_word=true;
+		   }
+     };
+      
 	   $scope.rememberChecked = function() {
 		   if ($scope.remember_me==true) {
 				return true;

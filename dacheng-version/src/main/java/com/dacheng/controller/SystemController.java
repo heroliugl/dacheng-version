@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class SystemController extends BaseController{
 	
     @RequestMapping(value="/index", method = RequestMethod.GET)
-    public String index() {
+    public String index(HttpServletRequest request) {
         return "/index";
     }
     
