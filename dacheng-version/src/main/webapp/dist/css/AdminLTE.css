@@ -1248,7 +1248,7 @@ a:focus {
  */
 .form-control {
   border-radius: 3;
-  height: 45px;
+ /*  height: 45px; */
   box-shadow: none;
   border-color: #d2d6de;
 }
@@ -2200,7 +2200,7 @@ a:focus {
   -moz-box-shadow: none;
   box-shadow: none;
   border-width: 1px;
-  padding: 10px 12px;
+  padding: 6px 6px;
   font-size:18px;
 }
 .btn:active {
@@ -3253,7 +3253,6 @@ table.text-center th {
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {
   color: #777;
-  top:5;
 }
 .login-box-msg,
 .register-box-msg {

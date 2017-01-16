@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.dacheng.entity.ImeiAuthor;
 import com.dacheng.entity.User;
 
 public interface UserMapper {
@@ -12,7 +11,7 @@ public interface UserMapper {
 	 * 保存用户信息
 	 * @return 受影响行数
 	 */
-	public int saveUser(@Param("user") User user) throws Exception;
+	public int saveUser(User user) throws Exception;
 
 	
 	/**

@@ -8,18 +8,18 @@
 
 
 	<sql id="userColumn">
-		id,username userName,fullname fullName,password
-		,head_img_url headImgUrl,email,status,createtime createTime,update_time updateTime
+		id,user_name userName,full_name fullName,password
+		,head_img_url headImgUrl,email,status,create_time createTime,update_time updateTime
 	</sql>
     
     <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">  
-	    insert into t_user(username, fullname, email, password, head_img_url, createtime, status)  
+	    insert into t_user(user_name, full_name, email, password, head_img_url, create_time, status)  
 	    values(#{userName}, #{fullName}, #{email}, #{password}, #{headImgUrl}, now(),#{status})  
 	</insert> 
 	
 	
 	<select id="findUserByLoginNameAndPassword" resultType="User">
-		select <include refid="userColumn" /> from t_user where username = #{loginName} and password = #{password}
+		select <include refid="userColumn" /> from t_user where user_name = #{loginName} and password = #{password}
 	</select> 
 	
 	
@@ -28,7 +28,7 @@
 	</select> 
 	
 	<select id="findUserByLoginName" resultType="User">
-		select <include refid="userColumn" /> from t_user where username = #{loginName}
+		select <include refid="userColumn" /> from t_user where user_name = #{loginName}
 	</select>
 	
 	 <select id="findUserList" resultType="User">
@@ -38,7 +38,7 @@
            and status = #{status}
         </if>
         <if test="userName != null and userName != '' ">
-           and username = #{userName}
+           and user_name = #{userName}
         </if>
         <if test="email != null and email != '' ">
            and email = #{email}

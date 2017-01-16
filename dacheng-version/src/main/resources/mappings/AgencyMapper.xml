@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 用户Dao接口实现类 -->
+
+<!-- 用户Dao接口 -->
+<mapper namespace="com.dacheng.mapper.AgencyMapper">
+
+	<sql id="agencyColumn">
+		agency_id agencyId,agency_code agencyCode,agency_name agencyName,contacts,mobilephone mobilePhone
+		,telephone telePhone,email,remarks,status,create_time createTime,update_time updateTime
+	</sql>
+	
+    <insert id="saveAgency" parameterType="Agency" useGeneratedKeys="true" keyProperty="agency_id">  
+	    insert into dc_agency(agency_code, agency_name,contacts,mobilephone,telephone, email, remarks, create_time, status)  
+	    values(#{agencyCode}, #{agencyName}, #{contacts}, #{mobilePhone}, #{telePhone},#{email}, #{remarks}, now(),#{status})  
+	    <selectKey resultType="long" keyProperty="agency_id" order="AFTER">
+			select LAST_INSERT_ID()
+		</selectKey>
+	</insert> 
+	
+	<!-- 根据ID删除产品信息 -->
+	<delete id="deleteAgencyById">
+		delete from dc_agency where agency_id = #{agencyId}
+	</delete>
+	
+	<!-- 根据产品ID更新里程 -->
+	<update id="updateAgency" parameterType="Agency">
+		update dc_device_type 
+		<set>
+		    update_time = now()
+			<if test="agencyCode != null and agencyCode != '' ">
+				,agency_code = #{agencyCode}
+			</if>
+			<if test="agencyName != null and agencyName != '' ">
+				,agency_name = #{agencyName}
+			</if>
+			<if test="contacts != null and contacts != '' ">
+				,contacts = #{contacts}
+			</if>
+			<if test="mobilePhone != null and mobilePhone != '' ">
+				,mobilephone = #{mobilePhone}
+			</if>
+			<if test="telePhone != null and telePhone != '' ">
+				,telephone = #{telePhone}
+			</if>
+			<if test="email != null and email != '' ">
+				,email = #{email}
+			</if>
+			<if test="remarks != null and remarks != '' ">
+				,remarks = #{remarks}
+			</if>
+			<if test="status != null and status != '' ">
+				,status = #{status}
+			</if>
+		</set>
+		where agency_id = #{agencyId}
+	</update>
+	
+	<select id="findAgencyById" resultType="Agency">
+		select <include refid="agencyColumn" /> from dc_agency where agency_id = #{agencyId}
+	</select> 
+	
+	
+	<select id="checkAgencyNameIsExist" resultType="int">
+		select count(*) from dc_agency where agency_name = #{agencyName}
+	</select> 
+	
+	<select id="checkAgencyCodeIsExist" resultType="int">
+		select count(*)  from dc_agency where agency_code = #{agencyCode}
+	</select>
+	
+	 <select id="findAgencyList" resultType="Agency">
+		select <include refid="agencyColumn" /> from dc_agency
+		where 1 = 1
+		<if test="status != null and status != '' ">
+           and status = #{status}
+        </if>
+        <if test="agencyName != null and agencyName != '' ">
+           and agency_name = #{agencyName}
+        </if>
+         <if test="agencyCode != null and agencyCode != '' ">
+           and agency_code = #{agencyCode}
+        </if>
+        <if test="contacts != null and contacts != '' ">
+           and contacts = #{contacts}
+        </if>
+         <if test="mobilePhone != null and mobilePhone != '' ">
+           and mobilephone = #{mobilePhone}
+        </if>
+         <if test="telePhone != null and telePhone != '' ">
+           and telephone = #{telePhone}
+        </if>
+        <if test="email != null and email != '' ">
+           and email = #{email}
+        </if>
+        order by agency_id
+	</select>
+
+</mapper>

@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dacheng.entity.User;
 import com.dacheng.entity.Version;
 import com.dacheng.entity.VersionLog;
 import com.dacheng.entity.view.PageView;
 import com.dacheng.service.VersionLogService;
 import com.dacheng.service.VersionService;
+import com.dacheng.utils.MD5;
 import com.dacheng.utils.RandomStr;
 import com.dacheng.utils.ServiceConfig;
 
@@ -41,8 +43,6 @@ public class VersionController extends BaseController{
 	@Autowired
 	private VersionLogService versionLogService;
 	
-
-	private static String versionSource=ServiceConfig.getInstance().getValue("server_version_source");
 	
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String list() {
@@ -330,39 +330,41 @@ public class VersionController extends BaseController{
          */
         @RequestMapping(value="/delete/{versionId}",method = RequestMethod.POST)
         @ResponseBody
-        public Map<String,Object> delete(@PathVariable Long versionId){
+        public Map<String,Object> delete(@PathVariable Long versionId,@RequestParam(value ="password") String password){
             Map<String,Object> map= new HashMap<String,Object>();
-            if(null != versionId){
-            	try {
-            		Version version = versionService.findVersionById(versionId);
-                	if(null != version){
-                		versionService.deleteVersionById(versionId);
-                		versionLogService.deleteVersionLogById(versionId);
-                		// 检测本地版本文件是否存在，如果存在，删除本地版本文件
-                		if(StringUtils.isNotBlank(version.getUrl()) && StringUtils.isNotBlank(versionSource)){
-                			// 检测本地文件是否存在
-                			File file=new File(versionSource+version.getUrl());
-                			if(file.exists()){
-                				file.delete(); // 删除本地版本程序
-                			}
-                			
-                		}
-                		
-                		
-                	}
-                	map.put("code", 200);
-					map.put("codemsg", "版本删除成功");
-				} catch (Exception e) {
-					map.put("code", 500);
-					map.put("codemsg", "系统异常，版本删除失败，请重试或联系管理员");
-				}
-            	
+            User user = this.getUserSession();
+            if(null != versionId && StringUtils.isNotBlank(password) 
+            		&& null != user && StringUtils.isNotBlank(user.getPassword())){
+            	if(MD5.Md5(password).equalsIgnoreCase(user.getPassword())){ // 密码校验
+                	try {
+                		Version version = versionService.findVersionById(versionId);
+                    	if(null != version){
+                    		versionService.deleteVersionById(versionId);
+                    		versionLogService.deleteVersionLogById(versionId);
+                    		// 检测本地版本文件是否存在，如果存在，删除本地版本文件
+                    		if(StringUtils.isNotBlank(version.getUrl()) && StringUtils.isNotBlank(versionSource)){
+                    			// 检测本地文件是否存在
+                    			File file=new File(versionSource+version.getUrl());
+                    			if(file.exists()){
+                    				file.delete(); // 删除本地版本程序
+                    			}
+                    		}
+                    	}
+                    	map.put("code", 200);
+    					map.put("codemsg", "版本删除成功");
+    				} catch (Exception e) {
+    					map.put("code", 500);
+    					map.put("codemsg", "系统异常，版本删除失败，请重试或联系管理员");
+    				}
+            	}else{
+            		 map.put("code", 403);
+    	   			 map.put("codemsg", "密码输入错误");
+            	}
             }else{
             	 // 请求参数不完整
 	       		 map.put("code", 400);
 	   			 map.put("codemsg", "请求参数错误，请仔细检查");
             }
-
             return map;
         }
         

@@ -364,14 +364,14 @@
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul> -->
         </li>
-        <li>
-          <a href="#/version/list">
+        <!-- <li>
+          <a href="#/agency/list">
             <i class="fa fa-user"></i> <span>客户管理</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green"></small>
             </span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="#/version/list">
             <i class="fa fa-files-o"></i> <span>版本管理</span>
@@ -410,15 +410,15 @@
 	            <li><a href="javascript:void(0);"><i class="fa fa-circle-o"></i> Inline charts</a></li>
 	          </ul>
 	    </li> -->
-	     <li>
+	    <!--  <li>
           <a href="#/product/list">
             <i class="fa fa-sitemap"></i> <span>产品管理</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green"></small>
             </span>
           </a>
-        </li>
-        <li class="treeview">
+        </li> -->
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-plug"></i>
             <span>设备管理</span>
@@ -430,8 +430,8 @@
             <li><a href="#/device/list"><i class="fa fa-circle-o"></i>正版管理</a></li>
             <li><a href="#/device/piracyList"><i class="fa fa-circle-o"></i>盗版管理</a></li>
           </ul>
-        </li>
-         <li class="treeview">
+        </li> -->
+        <!--  <li class="treeview">
           <a href="#">
             <i class="fa fa-gavel"></i>
             <span>生产授权</span>
@@ -443,9 +443,9 @@
             <li><a href="#/author/list"><i class="fa fa-circle-o"></i>授权管理</a></li>
             <li><a href="#/author/applyList"><i class="fa fa-circle-o"></i>授权记录</a></li>
           </ul>
-        </li>
+        </li> -->
         <!-- 统计报表 -->
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-line-chart"></i>
             <span>统计报表</span>
@@ -458,8 +458,8 @@
             <li><a href="#/sales/map"><i class="fa fa-circle-o"></i> 地理分布</a></li>
             <li><a href="#/sales/line"><i class="fa fa-circle-o"></i> 趋势图</a></li>
           </ul>
-        </li>
-        <li class="treeview">
+        </li> -->
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa  fa-cogs"></i>
             <span>系统管理</span>
@@ -474,7 +474,7 @@
             <li><a href="#/user/password"><i class="fa fa-circle-o"></i>密码管理</a></li>
             
           </ul>
-        </li>
+        </li> -->
         <li>
           <a href="#/help">
             <i class="fa fa-book"></i> <span>帮助</span>
@@ -783,7 +783,10 @@
 <script src="dist/js/productList.js"></script>
 <script src="dist/js/imeiAuthorList.js"></script>
 <script src="dist/js/imeiApplyList.js"></script>
-
+<script src="dist/js/deviceList.js"></script>
+<script src="dist/js/piracyList.js"></script>
+<script src="dist/js/agencyList.js"></script>
+<script src="dist/js/roleList.js"></script>
  <script type="text/javascript">
   var path = "<%=path%>";
   var source = en_source;

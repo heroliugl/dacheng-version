@@ -14,6 +14,10 @@ public class Device {
 	private BigDecimal unitPrice;  // 单价
 	private String batchId;    // 批次
 	
+	private DeviceType deviceType;
+	
+	private Agency agency;
+	
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -59,14 +63,29 @@ public class Device {
 	public String getBatchId() {
 		return batchId;
 	}
+	
 	public void setBatchId(String batchId) {
 		this.batchId = batchId;
+	}
+	
+	public DeviceType getDeviceType() {
+		return deviceType;
+	}
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
+	}
+	
+	public Agency getAgency() {
+		return agency;
+	}
+	public void setAgency(Agency agency) {
+		this.agency = agency;
 	}
 	
 	@Override
 	public String toString() {
 		return "Device [deviceId=" + deviceId + ", typeId=" + typeId + ", agencyId=" + agencyId + ", instockTime="
 				+ instockTime + ", createTime=" + createTime + ", updateTime=" + updateTime + ", unitPrice=" + unitPrice
-				+ ", batchId=" + batchId + "]";
+				+ ", batchId=" + batchId + ", deviceType=" + deviceType + ", agency=" + agency + "]";
 	}
 }

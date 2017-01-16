@@ -79,6 +79,18 @@ App.config(['$stateProvider', '$urlRouterProvider', function ( $stateProvider, $
         url: '/role/list',
         templateUrl: path+ '/role/list', 
         controller: 'rolesCtrl'
+    }).state('device/list', {
+        url: '/device/list',
+        templateUrl: path+ '/device/list', 
+        controller: 'devicesCtrl'
+    }).state('device/piracyList', {
+        url: '/device/piracyList',
+        templateUrl: path+ '/device/piracyList', 
+        controller: 'piracysCtrl'
+    }).state('agency/list', {
+        url: '/agency/list',
+        templateUrl: path+ '/agency/list', 
+        controller: 'agencysCtrl'
     }).state('help', {
         url: '/help',
         templateUrl: path+ '/pages/help.html' 
@@ -503,6 +515,11 @@ function _init() {
           });
         }else{
         	 var parent = $this.parents('ul').first();
+             //Close all open menus within the parent
+             var ul = parent.find('ul:visible').slideUp(animationSpeed);
+             //Remove the menu-open class from the parent
+             ul.removeClass('menu-open');
+        	 
         	 parent.find('li.active').removeClass('active');
         	 var parent_li = $this.parent("li");
         	 parent_li.addClass('active');

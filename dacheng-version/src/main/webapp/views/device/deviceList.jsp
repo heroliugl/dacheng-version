@@ -20,12 +20,32 @@
             <div class="box-header with-border">
               <h3 class="box-title">Create Event</h3>
             </div> -->
-            <div class="box-body">
-              <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+            <div class="box-body" style="margin-top: 10px;">
+              <div class="form-group col-xs-12 col-sm-2 col-md-2" >
                 <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
                  <!-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addfloormapModal">添加新版本</button> -->
-                 <a href="#/product/add" class="btn btn-primary ">添加新设备</a>
+                 <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+                 <!-- <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#addfloormapModal">添加新版本</button> -->
+                 <a href="#/product/add" class="btn btn-primary col-xs-12">添加新设备</a>
+                 </div>
               </div>
+              <div class="form-group col-xs-12 col-sm-5 col-md-5">
+                     <label for="status" class="col-xs-12 col-sm-6 col-md-3 control-label" style="margin-top: 7px;">设备MAC</label>
+                     <div class="col-xs-12 col-sm-6 col-md-9">
+	                     <input class="form-control" name="email" ng-model="email">
+                     </div>
+                 </div>
+             <div class="form-group col-xs-12 col-sm-5 col-md-5">
+                     <label for="status" class="col-xs-12 col-sm-6 col-md-3 control-label" style="margin-top: 7px;">产品名称</label>
+                     <div class="col-xs-12 col-sm-6 col-md-9">
+	                      <select ng-change="doQuery()" ng-init="status=''" ng-model="status" class="form-control" name="status">
+	                             <option value="" selected="selected">ALL</option>
+								   <option value="1">Enabled</option>
+								   <option value="0" >Disabled</option>
+							</select>
+                     </div>
+                 </div>
               <!-- /btn-group -->
             </div>
           </div>
@@ -43,32 +63,31 @@
                 <thead>
                 <tr>
                   <th>序号</th>
+                  <th>设备MAC</th>
                   <th>产品名称</th>
-                  <th>产品标识Key</th>
-                  <th>状态</th>
-                  <th>创建时间</th>
+                  <th>入库时间</th>
                   <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="p in products track by $index" ng-cloak>
+                <tr ng-repeat="n in devices track by $index" ng-cloak>
 					<td>{{$index+1}}</td>
-					<td>{{p.typeName}}</td>
-					<td>{{p.typeCode}}</td>
-					<td>{{p.status == '1' ?'生效':'已失效'}}</td>
-					<td>{{p.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<td>{{n.deviceId}}</td>
+					<td>{{n.deviceType.typeName}}</td>
+					<td>{{n.instockTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					<!-- <td>{{p.status == '1' ?'生效':'已失效'}}</td> -->
+					<!-- <td>{{p.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td> -->
 					<td>
-					    <a href="javascript:void(0);" ng-click="showEdit(p.id,p)"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-					    <a href="javascript:void(0);" ng-click="showDel(p.id,p)"><i class="fa fa-trash"></i> 删除</a>
+					    <a href="javascript:void(0);" ng-click="showEdit(n.deviceId,n)"><i class="fa fa-edit"></i> 编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					    <a href="javascript:void(0);" ng-click="showDel(n.deviceId,n)"><i class="fa fa-trash"></i> 删除</a>
 					</td>
 				</tr>
                 <tfoot>
-	                 <tr>
+	                <tr>
 	                  <th>序号</th>
+	                  <th>设备MAC</th>
 	                  <th>产品名称</th>
-	                  <th>产品标识Key</th>
-	                  <th>状态</th>
-	                  <th>创建时间</th>
+	                  <th>入库时间</th>
 	                  <th>操作</th>
 	                </tr>
                 </tfoot>

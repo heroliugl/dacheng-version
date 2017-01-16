@@ -1,41 +1,23 @@
   $(function () {
-/*	  var language = {
-  			"sLengthMenu":"每页显示 _MENU_ 条记录",
-			"sZeroRecords":"抱歉， 没有找到",
-			"sInfo":"从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
-			"sInfoEmpty": "没有数据",
-			"sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-			"oPaginate": {
-    			"sFirst":"首页",
-    			"sPrevious":"前一页",
-    			"sNext":"后一页",
-    			"sLast":"尾页"
-			},
-            "bPaginate":true
-	  }
-     $("#example1").DataTable({
-    		"oLanguage":language
-    	});*/
   });
   
-  App.controller('versionsCtrl', function($scope, $http) {
+  App.controller('agencysCtrl', function($scope, $http) {
 	   	 console.log("5555555555555555555555555555555555555555");
 	   	 
 	   	  $scope.currentPage = 0;
 	   	  $scope.pageCount = 0; 
 	   	  $scope.source = source;
-	   	  // $timeout(function(){},500);
 
 	    	  $scope.doQuery = function() {
 	   	  		
-	     		 $.post(path + "/version/list",
+	     		 $.post(path + "/agency/list",
 	     	  	   {
 	     			  currentPage: $scope.paginationConf.currentPage,
 	              pageSize : $scope.paginationConf.itemsPerPage
 	     	  	    }).success(
 	     	  	       function (response) {
 	     	  	    	  //  Framework.Admin.detectLoginStatus(response);
-	     	  	    	   $scope.versions = response.page.records;
+	     	  	    	   $scope.agencys = response.page.records;
 	     	               $scope.paginationConf.totalItems = response.page.rowCount;
 	     	  	    	   $scope.$apply();
 	     	  	    	   // $timeout(function(){$scope.doUserPermissionQuery();},1);
@@ -99,9 +81,7 @@
 	        
 	        // 显示删除确认框
 	    	$scope.showDel = function(id,obj) {
-	    		 $scope.del_pwd="";
-	    		 $scope.del_pwd_s=false;
-	    		 // console.log(JSON.stringify(obj));
+	    		console.log(JSON.stringify(obj));
 		    	 $scope.delVersion=obj;
 		   		 $scope.del_version_id = id
 		   	     $("#delModal").modal();
@@ -109,24 +89,14 @@
 	        
 	        // 版本删除
 	    	$scope.doDel = function() {
-	    		 var del_pwd = $scope.del_pwd;
-	    		 if(!del_pwd || del_pwd.length == 0){
-	    			 $scope.del_pwd_v="请输入登陆密码确认 ！";
-	    			 $scope.del_pwd_s=true;
-	    			 return;
-	    		 }
-	    		 $scope.del_pwd_s=false;
-	    		$.post(path + "/version/delete/"+$scope.del_version_id,{password:del_pwd}).success(
+	    		$.post(path + "/version/delete/"+$scope.del_version_id).success(
 	 				   function (response) {
 	 					  if(response.code == '200') {
 	 						 $scope.doQuery();
 	 						 $("#delModal").modal('hide');
-	 					  }if(response.code == '403') {
-	 						 $scope.del_pwd_v=response.codemsg;
-	 		    			 $scope.del_pwd_s=true;
 	 					  }else{
 	 						  $("#delModal").modal('hide');
-	 						  $scope.showDialog("Warning",response.codemsg);
+	 						  $scope.showDialog("Warning",source[response.codemsg]);
 	 					  }
 	 			 });
 	        };

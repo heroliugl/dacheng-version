@@ -94,5 +94,4 @@ public class Agency {
 				+ email + ", status=" + status + ", remarks=" + remarks + ", createTime=" + createTime + ", updateTime="
 				+ updateTime + "]";
 	}
-	
 }

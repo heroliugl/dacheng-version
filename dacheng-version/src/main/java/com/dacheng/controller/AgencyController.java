@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.dacheng.entity.DeviceType;
+import com.dacheng.entity.Agency;
 import com.dacheng.entity.view.PageView;
-import com.dacheng.service.DeviceTypeService;
+import com.dacheng.service.AgencyService;
 
 @Controller
-@RequestMapping(value = "/product")
-public class DeviceTypeController {
-	//用户Biz接口
+@RequestMapping(value = "/agency")
+public class AgencyController {
+	// 接口
 	@Resource
-	private DeviceTypeService deviceTypeService;
+	private AgencyService agencyService;
 	
 	/**
 	 * 页面跳转
@@ -28,7 +28,7 @@ public class DeviceTypeController {
 	 */
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String list() {
-        return "/views/product/productList";
+        return "/views/agency/agencyList";
     }
     
     /**
@@ -41,12 +41,12 @@ public class DeviceTypeController {
     @RequestMapping(value="/list", method = RequestMethod.POST)
     @ResponseBody
     public Map<String,Object> list(@RequestParam(value = "currentPage", defaultValue = "0") int currentPage
-            , @RequestParam(value = "pageSize", defaultValue = "50") int pageSize,DeviceType deviceType) {
+            , @RequestParam(value = "pageSize", defaultValue = "50") int pageSize,Agency agency) {
     	 Map<String, Object> map = new HashMap<String, Object>();
     	 try {
-    		 PageView<DeviceType> pageView = deviceTypeService.findPage(currentPage, pageSize, deviceType);
+    		 PageView<Agency> pageView = agencyService.findPage(currentPage, pageSize, agency);
     		 map.put("code", 0);
- 			map.put("page", pageView);
+ 			 map.put("page", pageView);
 		} catch (Exception e) {
 			// TODO: handle exception
 			map.put("code", -1);

@@ -12,7 +12,10 @@ public class PiracyDevice {
 	private String typeCode;      // 产品key
 	private Date createTime;  // 创建时间
 	private Date updateTime;  // 更新时间
-	private String status;    // 批次
+	private String status;    // 状态
+	
+	private DeviceType deviceType;
+	
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -42,6 +45,13 @@ public class PiracyDevice {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	public DeviceType getDeviceType() {
+		return deviceType;
+	}
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
 	}
 	@Override
 	public String toString() {

@@ -103,7 +103,7 @@ public class LoginController extends BaseController{
 				e.printStackTrace();
 			}
     		if(null != user && null != user.getId()){
-    			user.setPassword(null);
+    			// user.setPassword(null);
     			request.getSession().setAttribute("user", user);
     			map.put("code", 200);
       			map.put("codemsg", "请求成功");

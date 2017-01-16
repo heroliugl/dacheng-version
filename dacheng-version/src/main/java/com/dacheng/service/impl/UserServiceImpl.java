@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
-import com.dacheng.entity.ImeiAuthor;
 import com.dacheng.entity.User;
 import com.dacheng.entity.view.PageView;
 import com.dacheng.mapper.UserMapper;
@@ -15,7 +14,7 @@ import com.dacheng.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-@Service("userBiz")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 	//用户Dao接口
 	@Resource
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	 * 保存用户信息
 	 * @return 受影响行数
 	 */
-	public int saveUser(@Param("user") User user) throws Exception {
+	public int saveUser(User user) throws Exception {
 		//调用《UserMapper》的《保存用户信息》方法
 		return this.userMapper.saveUser(user);
 	}

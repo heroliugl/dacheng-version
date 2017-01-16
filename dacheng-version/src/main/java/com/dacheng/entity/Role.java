@@ -1,18 +1,22 @@
 package com.dacheng.entity;
 
+import java.util.Date;
+
 public class Role {
-	private Long roleId;    // 角色编号
+	private Long id;    // 角色编号
 	private String roleName;   // 角色名称
 	private String roleKey;    // 角色标识
-	private String createTime; // 创建时间
-	private String description;// 角色介绍
+	private String rolePower;    // 角色标识
+	private String intro;       // 角色简介
 	private String status;     // 角色状态  1：生效  0：失效
+	private Date createTime; // 创建时间
+	private Date updateTime; // 更新时间
 	
-	public Long getRoleId() {
-		return roleId;
+	public Long getId() {
+		return id;
 	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getRoleName() {
 		return roleName;
@@ -26,17 +30,11 @@ public class Role {
 	public void setRoleKey(String roleKey) {
 		this.roleKey = roleKey;
 	}
-	public String getCreateTime() {
-		return createTime;
+	public String getIntro() {
+		return intro;
 	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 	public String getStatus() {
 		return status;
@@ -44,11 +42,31 @@ public class Role {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public String getRolePower() {
+		return rolePower;
+	}
+	
+	public void setRolePower(String rolePower) {
+		this.rolePower = rolePower;
+	}
 	
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleKey=" + roleKey + ", createTime="
-				+ createTime + ", description=" + description + ", status=" + status + "]";
+		return "Role [id=" + id + ", roleName=" + roleName + ", roleKey=" + roleKey + ", rolePower=" + rolePower
+				+ ", intro=" + intro + ", status=" + status + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + "]";
 	}
-	
 }
